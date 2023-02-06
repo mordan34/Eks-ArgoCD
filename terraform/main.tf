@@ -18,7 +18,7 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "3.19.0"
 
-  name = "education-vpc"
+  name = "Tikal-vpc"
 
   cidr = "10.0.0.0/16"
   azs  = slice(data.aws_availability_zones.available.names, 0, 3)
@@ -78,4 +78,11 @@ module "eks" {
       desired_size = 1
     }
   }
+}
+
+resource "helm_release" "argo-cd" {
+  name       = "argo-cd"
+  repository = "https://argoproj.github.io/argo-helm"
+  chart      = "argo-cd"
+  version    = "5.19.15"
 }
