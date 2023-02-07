@@ -7,5 +7,5 @@ variable "region" {
 variable "node_type" {
   description = "EC2 instance type for EKS nodes"
   type = string
-  default = "t2.micro"
+  default = "t3.small"
 }
