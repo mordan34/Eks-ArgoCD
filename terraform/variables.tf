@@ -9,3 +9,9 @@ variable "node_type" {
   type = string
   default = "t3.small"
 }
+
+variable "argo-ns" {
+  description = "K8S namespace for ArgoCD"
+  type = string
+  default = "argocd"
+}
