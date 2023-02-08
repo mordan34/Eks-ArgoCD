@@ -102,32 +102,5 @@ resource "helm_release" "argo-cd" {
 }
 
 resource "kubectl_manifest" "ingress_argocd_argocd" {
-  yaml_body  = <<-EOF
-    apiVersion: networking.k8s.io/v1
-    kind: Ingress
-    metadata:
-      annotations:
-        alb.ingress.kubernetes.io/backend-protocol: HTTP
-        alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-northeast-2:123456789012:certificate/xxxx
-        alb.ingress.kubernetes.io/group.name: dev
-        alb.ingress.kubernetes.io/group.order: "4"
-        alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
-        kubernetes.io/ingress.class: alb
-      labels:
-        prod: argocd
-      name: argocd
-      namespace: argocd
-    spec:
-      rules:
-        - host: argocd.tikal.com
-          http:
-            paths:
-              - backend:
-                  service: 
-                    name: argo-cd-argocd-server
-                    port: 
-                      number: 80
-                path: /
-                pathType: Prefix
-  EOF
+  yaml_body  = file("${path.module}/argocd-ingress.yaml")
 }
