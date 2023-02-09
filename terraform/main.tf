@@ -80,7 +80,7 @@ module "eks" {
   }
 }
 
-resource "kubernetes_namespace" "argo-ns" {
+resource "kubernetes_namespace" "argo_ns" {
   metadata {
     annotations = {
       name = var.argo-ns
@@ -89,18 +89,50 @@ resource "kubernetes_namespace" "argo-ns" {
   }
 }
 
-resource "helm_release" "argo-cd" {
+resource "helm_release" "argo_cd" {
   name       = "argo-cd"
   repository = "https://argoproj.github.io/argo-helm"
   chart      = "argo-cd"
   version    = "5.19.15"
-  namespace =  var.argo-ns
+  namespace =  kubernetes_namespace.argo_ns.metadata[0].name
   set {
     name  = "server.service.type"
-    value = "NodePort"
+    value = "LoadBalancer"
+  }
+
+  set {
+    name  = "server.service.annotations\\.beta\\.kubernetes\\.io/aws-load-balancer-proxy-protocol"
+    value = "*"
+  }
+
+  set {
+    name  = "server.service.annotations.external-dns\\.alpha\\.kubernetes.io/hostname"
+    value = "argocd.${var.domain}"
+  }
+
+  set {
+    name  = "server.service.annotations.service\\.beta\\.kubernetes.io/aws-load-balancer-scheme"
+    value = "external"
   }
 }
 
-resource "kubectl_manifest" "ingress_argocd_argocd" {
+resource "aws_route53_zone" "main" {
+  name = var.domain
+}
+
+
+module "load_balancer_controller" {
+  source                           = "DNXLabs/eks-lb-controller/aws"
+  version                          = "0.7.0"
+  cluster_identity_oidc_issuer     = module.eks.cluster_oidc_issuer_url
+  cluster_identity_oidc_issuer_arn = module.eks.oidc_provider_arn
+  cluster_name                     = module.eks.cluster_name
+}
+
+resource "kubectl_manifest" "ingress_argocd" {
   yaml_body  = file("${path.module}/argocd-ingress.yaml")
+
+  depends_on = [
+        module.eks
+  ]
 }

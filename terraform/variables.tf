@@ -15,3 +15,9 @@ variable "argo-ns" {
   type = string
   default = "argocd"
 }
+
+variable "domain" {
+  description = "Route53 domain name"
+  type = string
+  default = "tikaldev.click"
+}
