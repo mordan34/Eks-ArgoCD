@@ -10,10 +10,16 @@ variable "node_type" {
   default = "t3.small"
 }
 
-variable "argo-ns" {
+variable "argo_ns" {
   description = "K8S namespace for ArgoCD"
   type = string
   default = "argocd"
+}
+
+variable "argo_svc" {
+  description = "K8S service name for ArgoCD"
+  type = string
+  default = "argo-cd-argocd-server"
 }
 
 variable "domain" {

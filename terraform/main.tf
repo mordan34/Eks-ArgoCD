@@ -6,7 +6,7 @@ provider "aws" {
 data "aws_availability_zones" "available" {}
 
 locals {
-  cluster_name = "${var.env_name}-eks-${random_string.suffix.result}"
+  cluster_name = "Prod-eks-${random_string.suffix.result}"
 }
 
 resource "random_string" "suffix" {
@@ -39,10 +39,6 @@ module "vpc" {
     "kubernetes.io/cluster/${local.cluster_name}" = "shared"
     "kubernetes.io/role/internal-elb"             = 1
   }
-}
-
-resource "aws_route53_zone" "main" {
-  name = var.domain
 }
 
 module "load_balancer_controller" {

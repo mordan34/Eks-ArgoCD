@@ -35,9 +35,9 @@ module "eks" {
 resource "kubernetes_namespace" "argo_ns" {
   metadata {
     annotations = {
-      name = var.argo-ns
+      name = var.argo_ns
     }
-    name = var.argo-ns
+    name = var.argo_ns
   }
 
   depends_on = [
