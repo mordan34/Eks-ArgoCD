@@ -41,6 +41,8 @@ resource "kubectl_manifest" "ingress_argocd" {
 
   depends_on = [
         module.eks,
-        module.load_balancer_controller
+        module.load_balancer_controller,
+        kubernetes_namespace.argo_ns,
+        aws_route53_zone.main
   ]
 }

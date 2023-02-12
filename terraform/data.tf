@@ -12,6 +12,7 @@ data "kubernetes_service" "ingress_argocd" {
     name      = var.argo_svc
     namespace = var.argo_ns
   }
+  depends_on = [module.load_balancer_controller]
 }
 
 data "aws_elb" "ingress_argocd" {
@@ -19,4 +20,5 @@ data "aws_elb" "ingress_argocd" {
     "(^[^-]+)",
     data.kubernetes_service.ingress_argocd.status[0].load_balancer[0].ingress[0].hostname
   )[0]
+  depends_on = [data.kubernetes_service.ingress_argocd]
 }
