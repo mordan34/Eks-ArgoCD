@@ -21,3 +21,15 @@ variable "domain" {
   type = string
   default = "tikaldev.click"
 }
+
+variable "appname" {
+  description = "General name for the app installed"
+  type = string
+  default = "argocd"
+}
+
+variable "env_name" {
+  description = "The Environment to be used"
+  type = string
+  default = "Dev"
+}
