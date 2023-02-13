@@ -32,7 +32,8 @@ resource "helm_release" "argo_cd" {
   depends_on = [
         module.eks,
         random_password.master_password,
-        module.load_balancer_controller
+        module.load_balancer_controller,
+        kubernetes_namespace.argo_ns
   ]
 }
 
