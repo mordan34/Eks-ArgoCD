@@ -5,7 +5,7 @@ resource "random_password" "master_password" {
 }
 
 resource "aws_secretsmanager_secret" "sm" {
-  name                    = format("secret-%s-%s", var.appname, var.env_name)
+  name                    = format("secret-%s-%s-%s", var.appname, var.env_name, random_string.suffix.result)
   description             = format("Secret for %s in %s environment", var.appname, var.env_name)
   recovery_window_in_days = 7
 
