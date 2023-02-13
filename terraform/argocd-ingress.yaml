@@ -18,7 +18,7 @@ spec:
             paths:
               - backend:
                   service: 
-                    name: "${var.argocd_svc}"
+                    name: "${argocd_svc}"
                     port: 
                       number: 80
                 path: /

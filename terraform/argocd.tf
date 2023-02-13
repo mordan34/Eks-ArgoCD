@@ -38,7 +38,7 @@ resource "helm_release" "argo_cd" {
 }
 
 resource "kubectl_manifest" "ingress_argocd" {
-  yaml_body  = file("${path.module}/argocd-ingress.yaml")
+  yaml_body  = templatefile("${path.module}/argocd-ingress.yaml", { argocd_svc = "${var.argo_svc}" })
 
   depends_on = [
         module.eks,
