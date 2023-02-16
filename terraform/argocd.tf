@@ -41,9 +41,7 @@ resource "kubectl_manifest" "ingress_argocd" {
   yaml_body  = templatefile("${path.module}/argocd-ingress.yaml", { argocd_svc = "${var.argo_svc}" })
 
   depends_on = [
-        module.eks,
-        module.load_balancer_controller,
-        kubernetes_namespace.argo_ns,
+        helm_release.argo_cd,
         aws_route53_zone.main
   ]
 }
