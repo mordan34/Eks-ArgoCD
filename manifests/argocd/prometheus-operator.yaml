@@ -12,15 +12,41 @@ spec:
     server: https://kubernetes.default.svc
     namespace: prometheus
   source:
-    targetRevision: 36.2.0
+    targetRevision: 45.1.1
     chart: kube-prometheus-stack
     repoURL: https://prometheus-community.github.io/helm-charts
     helm:
-      parameters:
-        - name: prometheusOperator.admissionWebhooks.enabled
-          value: "false"
-        - name: prometheusOperator.tls.enabled
-          value: "false"
+      values: |   
+        prometheusOperator:
+          admissionWebhooks:
+            enabled: false
+        prometheus:
+          prometheusSpec:
+            storageSpec:
+              volumeClaimTemplate:
+                spec:
+                  storageClassName: gp2
+                  accessModes: ["ReadWriteOnce"]
+                  resources:
+                    requests:
+                      storage: 100Gi
+            retention: 30d
+          ingress:
+            enabled: true
+            ingressClassName: alb
+            hosts:
+              - monitoring.tikaldev.click
+            path:
+              - /*
+            annotations:
+              alb.ingress.kubernetes.io/scheme: internal
+              alb.ingress.kubernetes.io/backend-protocol: HTTP
+              alb.ingress.kubernetes.io/group.name: dev
+              alb.ingress.kubernetes.io/group.order: "5"
+              alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
+            service:
+              annotations:
+                alb.ingress.kubernetes.io/target-type: ip
   syncPolicy:
     automated:
       selfHeal: true
