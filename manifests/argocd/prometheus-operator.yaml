@@ -44,9 +44,6 @@ spec:
               alb.ingress.kubernetes.io/group.name: dev
               alb.ingress.kubernetes.io/group.order: "5"
               alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
-            service:
-              annotations:
-                alb.ingress.kubernetes.io/target-type: ip
   syncPolicy:
     automated:
       selfHeal: true
