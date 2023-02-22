@@ -19,13 +19,19 @@ module "eks" {
       name = "node-group-1"
 
       instance_types = [var.node_type]
+      capacity_type  = "SPOT"
 
       min_size     = 1
       max_size     = 3
-      desired_size = 2
+      desired_size = 3
+
+      k8s_labels = {
+        Example    = "managed_node_groups"
+        GithubRepo = "terraform-aws-eks"
+        GithubOrg  = "terraform-aws-modules"
+      }
     }
   }
-
   tags = {
     environment = var.env_name
     build       = "Terraform"

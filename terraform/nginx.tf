@@ -7,7 +7,7 @@ resource "kubectl_manifest" "nginx" {
     depends_on = [
       kubectl_manifest.ingress_argocd
     ]
-    count     = length(data.kubectl_file_documents.nginx.documents)
+    count     = 0 #length(data.kubectl_file_documents.nginx.documents)
     yaml_body = element(data.kubectl_file_documents.nginx.documents, count.index)
     override_namespace = "argocd"
 }

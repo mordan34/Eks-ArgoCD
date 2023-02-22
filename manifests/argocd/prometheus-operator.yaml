@@ -20,30 +20,40 @@ spec:
         prometheusOperator:
           admissionWebhooks:
             enabled: false
-        prometheus:
-          prometheusSpec:
-            storageSpec:
-              volumeClaimTemplate:
-                spec:
-                  storageClassName: gp2
-                  accessModes: ["ReadWriteOnce"]
-                  resources:
-                    requests:
-                      storage: 100Gi
-            retention: 30d
+          prometheusConfigReloader:
+            resources: {}
+        # prometheus:
+          # prometheusSpec:
+            # storageSpec:
+            #   volumeClaimTemplate:
+            #     spec:
+            #       storageClassName: gp2
+            #       accessModes: ["ReadWriteOnce"]
+            #       resources:
+            #         requests:
+            #           storage: 100Gi
+            # retention: 30d
+        grafana: 
           ingress:
             enabled: true
             ingressClassName: alb
+            annotations:
+              alb.ingress.kubernetes.io/target-type: 'ip'
+              alb.ingress.kubernetes.io/scheme: internet-facing
+              alb.ingress.kubernetes.io/healthcheck-path:	/api/health
             hosts:
               - monitoring.tikaldev.click
-            path:
-              - /*
-            annotations:
-              alb.ingress.kubernetes.io/scheme: internal
-              alb.ingress.kubernetes.io/backend-protocol: HTTP
-              alb.ingress.kubernetes.io/group.name: dev
-              alb.ingress.kubernetes.io/group.order: "5"
-              alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
+            dashboards:
+              default:
+                argocd:
+                  url: https://raw.githubusercontent.com/argoproj/argo-cd/master/examples/dashboard.json
+                  datasource: default
+                argocd-notifications:
+                  url: https://argocd-notifications.readthedocs.io/en/stable/grafana-dashboard.json
+                  datasource: default
+                argocd-image-updater:
+                  url: https://raw.githubusercontent.com/argoproj-labs/argocd-image-updater/master/config/example-grafana-dashboard.json
+                  datasource: default
   syncPolicy:
     automated:
       selfHeal: true
