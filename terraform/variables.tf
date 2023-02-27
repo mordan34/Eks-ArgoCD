@@ -34,6 +34,12 @@ variable "appname" {
   default = "argocd"
 }
 
+variable "ingress_svc" {
+  description = "General name for service"
+  type = string
+  default = "pages"
+}
+
 variable "env_name" {
   description = "The Environment to be used"
   type = string

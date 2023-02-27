@@ -18,3 +18,11 @@ resource "aws_route53_record" "ingress_argocd" {
         aws_route53_zone.main
   ]
 }
+
+resource "aws_route53_record" "ingress_nginx" {
+  zone_id = aws_route53_zone.main.id
+  name    = "${var.ingress_svc}.${var.domain}"
+  type    = "CNAME"
+  ttl     = "300"
+  records = [data.kubernetes_ingress.ingress_nginx.status.0.load_balancer.0.ingress.0.hostname]
+}
