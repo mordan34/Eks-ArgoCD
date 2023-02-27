@@ -13,9 +13,9 @@ resource "aws_s3_bucket_acl" "pages" {
 }
 
 resource "aws_s3_object" "homepage" {
-    for_each = fileset("homepage/", "*")
+    for_each = fileset("files/", "*")
     bucket = aws_s3_bucket.pages.id
     key = each.value
-    source = "myfiles/${each.value}"
-    etag = filemd5("homepage/${each.value}")
+    source = "files/${each.value}"
+    etag = filemd5("files/${each.value}")
 }

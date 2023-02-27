@@ -11,7 +11,7 @@ COPY requirements.txt /k8s_python/src
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copying src code to Container
-COPY . /k8s_python/src/app
+COPY . /k8s_python/src
 
 # Application Environment variables
 ENV APP_ENV development
@@ -19,8 +19,8 @@ ENV APP_ENV development
 # Exposing Ports
 EXPOSE 5035
 
-# Setting Persistent data
-VOLUME ["/app-data"]
+# configure the container to run in an executed manner
+ENTRYPOINT [ "python" ]
 
 # Running Python Application
-CMD ["python", "presentcontent.py"]
+CMD ["presentcontent.py" ]

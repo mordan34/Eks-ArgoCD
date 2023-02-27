@@ -1,3 +1,15 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
+from flask import Flask, render_template
+import os
 
-print("You've reached Python script.")
+app = Flask(__name__)
+
+
+@app.route('/')
+def home():
+    return render_template('page.html')
+
+
+if __name__ == "__main__":
+    port = int(os.environ.get('PORT', 5035))
+    app.run(debug=True, host='0.0.0.0', port=port)

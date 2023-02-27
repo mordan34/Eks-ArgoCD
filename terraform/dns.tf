@@ -22,7 +22,14 @@ resource "aws_route53_record" "ingress_argocd" {
 resource "aws_route53_record" "ingress_nginx" {
   zone_id = aws_route53_zone.main.id
   name    = "${var.ingress_svc}.${var.domain}"
-  type    = "CNAME"
-  ttl     = "300"
+  type    = "A"
+
+  alias {
+    name                   = data.kubernetes_ingress.ingress_nginx.status.0.load_balancer.0.ingress.0.hostname
+    zone_id                = data.aws_elb.ingress_nginx.zone_id
+    evaluate_target_health = false
+  }
   records = [data.kubernetes_ingress.ingress_nginx.status.0.load_balancer.0.ingress.0.hostname]
+  
+  depends_on = [data.kubernetes_ingress.ingress_nginx]
 }

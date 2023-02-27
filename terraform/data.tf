@@ -24,3 +24,11 @@ data "aws_elb" "ingress_argocd" {
   )[0]
   depends_on = [data.kubernetes_service.ingress_argocd]
 }
+
+data "aws_elb" "ingress_nginx" {
+  name = regex(
+    "(^[^-]+)",
+    data.kubernetes_ingress.ingress_nginx.status[0].load_balancer[0].ingress[0].hostname
+  )[0]
+  depends_on = [data.kubernetes_ingress.ingress_nginx]
+}
