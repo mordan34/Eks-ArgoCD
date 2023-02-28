@@ -19,16 +19,15 @@ resource "aws_route53_record" "ingress_argocd" {
   ]
 }
 
-# resource "aws_route53_record" "ingress_nginx" {
-#   zone_id = aws_route53_zone.main.id
-#   name    = "${var.ingress_svc}.${var.domain}"
-#   type    = "A"
+resource "aws_route53_record" "pages" {
+  zone_id = aws_route53_zone.main.id
+  name    = "${var.ingress_svc}.${var.domain}"
+  type    = "CNAME"
+  ttl     = "300"
+  records = ["k8s-ingressn-ingressn-4fa0f755c5-ae8b73a324ad4b40.elb.us-east-1.amazonaws.com"] #[data.kubernetes_ingress.ingress_nginx.status[0].load_balancer[0].ingress[0].hostname] #
 
-#   alias {
-#     name                   = data.kubernetes_service.ingress_nginx.status[0].load_balancer[0].ingress[0].hostname
-#     zone_id                = data.aws_elb.ingress_nginx.zone_id
-#     evaluate_target_health = false
-#   }
- 
-#   depends_on = [data.kubernetes_service.ingress_nginx]
-# }
+  depends_on = [
+        data.kubernetes_ingress.ingress_nginx,
+        kubectl_manifest.nginx
+  ]
+}

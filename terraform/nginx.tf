@@ -12,13 +12,3 @@ resource "kubectl_manifest" "nginx" {
       kubectl_manifest.ingress_argocd
     ]
 }
-
-data "kubernetes_ingress" "ingress_nginx" {
-  metadata {
-    name = "pages-ingress"
-  }
-
-  depends_on = [
-      kubectl_manifest.nginx
-    ]  
-}
