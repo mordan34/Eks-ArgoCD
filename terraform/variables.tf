@@ -45,3 +45,16 @@ variable "env_name" {
   type = string
   default = "Dev"
 }
+
+# Aws Autoscaler
+variable "autoscaler_enabled" {
+  type        = bool
+  default     = true
+  description = "If true Install Kubernetes Autoscaler"
+}
+
+variable "autoscaler_version" {
+  description = "Autoscaler chart version"
+  type        = string
+  default     = "9.9.2"
+}
