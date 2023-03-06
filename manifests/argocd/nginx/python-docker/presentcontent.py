@@ -47,7 +47,7 @@ def home():
     return render_template('index.html')
 
 
-@app.route("/my-public-bucket2023/page.html")
+@app.route("/my-pages-bucket/page.html")
 def getitem():
     bucket_name,filename=extract_path()
     print("Bucket name is: ", bucket_name)

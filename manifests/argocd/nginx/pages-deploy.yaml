@@ -13,6 +13,7 @@ spec:
       labels:
         k8s-app: pages
     spec:
+      serviceAccountName: pages-sa
       containers:
       - name: pages
         image: moros333/mydemos:latest
