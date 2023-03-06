@@ -1,4 +1,3 @@
-
 // Install ec2 node Autoscaler
 resource "helm_release" "cluster_autoscaler" {
   count = var.autoscaler_enabled ? 1 : 0
