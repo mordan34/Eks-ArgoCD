@@ -27,7 +27,7 @@ data "aws_elb" "ingress_argocd" {
 
 data "kubernetes_service" "ingress_nginx" {
   metadata {
-    name      = "${var.ingress_svc}"
+    name      = var.ingress_svc
     namespace = var.argo_ns
   }
 
