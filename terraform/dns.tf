@@ -19,19 +19,6 @@ resource "aws_route53_record" "ingress_argocd" {
   ]
 }
 
-# resource "aws_route53_record" "pages" {
-#   zone_id = aws_route53_zone.main.id
-#   name    = "${var.ingress_svc}.${var.domain}"
-#   type    = "CNAME"
-#   ttl     = "300"
-#   records = ["k8s-ingressn-ingressn-4fa0f755c5-ae8b73a324ad4b40.elb.us-east-1.amazonaws.com"] #[data.kubernetes_ingress.ingress_nginx.status[0].load_balancer[0].ingress[0].hostname] #
-
-#   depends_on = [
-#         data.kubernetes_ingress.ingress_nginx,
-#         kubectl_manifest.nginx
-#   ]
-# }
-
 resource "aws_route53_record" "pages" {
   for_each = toset(["A", "AAAA"])
 
@@ -48,5 +35,17 @@ resource "aws_route53_record" "pages" {
         aws_route53_zone.main,
         data.aws_elb.ingress_nginx,
         data.kubernetes_service.ingress_nginx
+  ]
+}
+
+module "eks-external-dns" {
+  source  = "lablabs/eks-external-dns/aws"
+  version = "1.1.1"
+
+  cluster_identity_oidc_issuer 	= module.eks.cluster_oidc_issuer_url
+  cluster_identity_oidc_issuer_arn  = module.eks.oidc_provider_arn
+
+  depends_on = [
+        module.eks
   ]
 }

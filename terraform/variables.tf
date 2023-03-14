@@ -58,3 +58,9 @@ variable "autoscaler_version" {
   type        = string
   default     = "9.9.2"
 }
+
+variable "grafana_svc" {
+  description = "Route53 record name of grafana service"
+  type        = string
+  default     = "monitoring"
+}

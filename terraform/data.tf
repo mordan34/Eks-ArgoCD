@@ -25,6 +25,7 @@ data "aws_elb" "ingress_argocd" {
   depends_on = [data.kubernetes_service.ingress_argocd]
 }
 
+# Data regarding nginx resources
 data "kubernetes_service" "ingress_nginx" {
   metadata {
     name      = var.ingress_svc
@@ -33,9 +34,8 @@ data "kubernetes_service" "ingress_nginx" {
 
   depends_on = [
       kubectl_manifest.nginx
-    ] 
+  ] 
 }
-
 data "aws_elb" "ingress_nginx" {
   name = regex(
     "(^[^-]+)",
