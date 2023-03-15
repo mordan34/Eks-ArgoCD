@@ -20,11 +20,6 @@ resource "helm_release" "argo_cd" {
   }
 
   set {
-    name  = "server.service.annotations.external-dns\\.alpha\\.kubernetes.io/hostname"
-    value = "argocd.${var.domain}"
-  }
-
-  set {
     name  = "server.service.annotations.service\\.beta\\.kubernetes.io/aws-load-balancer-scheme"
     value = "external"
   }

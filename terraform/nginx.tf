@@ -4,7 +4,7 @@ data "kubectl_filename_list" "manifests" {
 }
 
 resource "kubectl_manifest" "nginx" {
-    count     = length(data.kubectl_filename_list.manifests.matches)
+    count     = 0 #length(data.kubectl_filename_list.manifests.matches)
     yaml_body = file(element(data.kubectl_filename_list.manifests.matches, count.index))
     override_namespace = var.argo_ns
 
