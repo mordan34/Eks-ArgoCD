@@ -41,6 +41,7 @@ spec:
               alb.ingress.kubernetes.io/target-type: 'ip'
               alb.ingress.kubernetes.io/scheme: internet-facing
               alb.ingress.kubernetes.io/healthcheck-path:	/api/health
+              external-dns.alpha.kubernetes.io/hostname: monitoring.tikaldev.click
             hosts:
               - monitoring.tikaldev.click
             dashboards:

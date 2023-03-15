@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+ name: awsclisa
+ namespace: airbyte
+ annotations:
+   eks.amazonaws.com/role-arn:  arn:aws:iam::557680788250:role/AirByteAdminS3Access
