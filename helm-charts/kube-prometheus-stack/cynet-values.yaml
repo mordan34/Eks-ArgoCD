@@ -1,0 +1,912 @@
+kube-prometheus-stack:
+
+  env: ""
+  prometheus-node-exporter:
+    extraArgs:
+      - --no-collector.ipvs
+      - --collector.filesystem.ignored-mount-points=^/(dev|proc|sys|var/lib/docker/.+|var/lib/kubelet/.+)($|/)
+      - --collector.filesystem.ignored-fs-types=^(autofs|binfmt_misc|bpf|cgroup2?|configfs|debugfs|devpts|devtmpfs|fusectl|hugetlbfs|iso9660|mqueue|nsfs|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|selinuxfs|squashfs|sysfs|tracefs)$
+  defaultRules:
+    rules:
+      etcd: false
+      general: true
+      kubeApiserver: false
+      kubeApiserverAvailability: false
+      kubeApiserverError: false
+      kubeApiserverSlos: false
+      kubernetesApps: false
+      kubeStateMetrics: false
+      kubernetesResources: false
+      kubernetesStorage: false
+      prometheus: false
+
+    additionalRuleLabels:
+      release: prometheus-operator
+
+  alertmanager:
+    enabled: true
+
+    alertmanagerSpec:
+      storage:
+        volumeClaimTemplate:
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 2Gi
+      resources:
+#        limits:
+#          cpu: 30m
+#          memory: 160Mi
+        requests:
+          cpu: 30m
+          memory: 160Mi
+
+    config:
+      global:
+        resolve_timeout: 2m
+	# ---
+       # slack_api_url: "https://hooks.slack.com/services/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"
+       # smtp_from: 'Prometheus Alerts'
+       # smtp_smarthost: 'smtp.office365.com:587'
+       # smtp_auth_username: 'tfs@cynet.com'
+       # smtp_auth_password: "99zz99td!QAZ"
+	#---
+      receivers:
+        - name: 'null'
+        - name: cysaas-critical-alerts
+          webhook_configs:
+            - url: http://prometheus-msteams:2000/cysaas-critical-alerts
+              send_resolved: true
+        - name: cysaas-low-priority-alerts
+          webhook_configs:
+            - url: http://prometheus-msteams:2000/cysaas-low-priority-alerts
+              send_resolved: true
+        - name: cysaas-high-priority-alerts
+          webhook_configs:
+            - url: http://prometheus-msteams:2000/cysaas-high-priority-alerts
+              send_resolved: true
+        - name: data-pipeline-alerts
+          webhook_configs:
+            - url: http://prometheus-msteams:2000/data-pipeline-alerts
+              send_resolved: true
+        - name: pipeline-pulsar-alerts
+          webhook_configs:
+            - url: http://prometheus-msteams:2000/pipeline-pulsar-alerts
+              send_resolved: true
+        - name: pipeline-general
+          webhook_configs:
+            - url: http://prometheus-msteams:2000/pipeline-general
+              send_resolved: true
+        - name: pipeline-clickhouse
+          webhook_configs:
+            - url: http://prometheus-msteams:2000/pipeline-clickhouse
+              send_resolved: true
+        - name: pipeline-logstash
+          webhook_configs:
+            - url: http://prometheus-msteams:2000/pipeline-logstash
+              send_resolved: true
+        - name: pipeline-opensearch
+          webhook_configs:
+            - url: http://prometheus-msteams:2000/pipeline-opensearch
+              send_resolved: true
+        - name: pipeline-pulsar-traffic
+          webhook_configs:
+            - url: http://prometheus-msteams:2000/pipeline-pulsar-traffic
+              send_resolved: true
+        - name: pipeline-ingestion
+          webhook_configs:
+            - url: http://prometheus-msteams:2000/pipeline-ingestion
+              send_resolved: true
+        - name: ninjas-alerts
+          webhook_configs:
+            - url: http://prometheus-msteams:2000/ninjas-alerts
+              send_resolved: true
+        - name: nginx-alerts-critical
+          webhook_configs:
+            - url: http://prometheus-msteams:2000/nginx-alerts-critical
+              send_resolved: true
+        - name: opsgenie-high-no-resolve
+          opsgenie_configs:
+          - api_url: https://api.opsgenie.com
+     #       api_key: fc381d87-5abf-4ec1-af58-266664254441
+            priority: 'P2'
+            send_resolved: false
+        - name: opsgenie-critical-no-resolve
+          opsgenie_configs:
+          - api_url: https://api.opsgenie.com
+       #     api_key: fc381d87-5abf-4ec1-af58-266664254441
+            priority: 'P1'
+            send_resolved: false
+        - name: opsgenie-critical
+          opsgenie_configs:
+          - api_url: https://api.opsgenie.com
+          #  api_key: fc381d87-5abf-4ec1-af58-266664254441
+            priority: 'P1'
+            send_resolved: true
+        - name: opsgenie-high
+          opsgenie_configs:
+          - api_url: https://api.opsgenie.com
+        #    api_key: fc381d87-5abf-4ec1-af58-266664254441
+            priority: 'P2'
+            send_resolved: true
+        - name: opsgenie-warning
+          opsgenie_configs:
+          - api_url: https://api.opsgenie.com
+         #   api_key: fc381d87-5abf-4ec1-af58-266664254441
+            priority: 'P3'
+            send_resolved: true
+        - name: opsgenie-warning-no-resolve
+          opsgenie_configs:
+          - api_url: https://api.opsgenie.com
+       #     api_key: fc381d87-5abf-4ec1-af58-266664254441
+            priority: 'P3'
+            send_resolved: false
+
+      inhibit_rules:
+          ### LINUX CPU ###
+        - source_match:
+            severity: critical
+            alertname: LinuxCPUCRITICALAlert
+          target_match:
+              severity: high
+              alertname: LinuxCPUHIGHAlert
+          equal: [ 'instance' ]
+        - source_match:
+            severity: critical
+            alertname: LinuxCPUCRITICALAlert
+          target_match:
+              severity: warning
+              alertname: LinuxCPUWARNINGAlert
+          equal: [ 'instance' ]
+        - source_match:
+            severity: high
+            alertname: LinuxCPUHIGHAlert
+          target_match:
+              severity: warning
+              alertname: LinuxCPUWARNINGAlert
+          equal: [ 'instance' ]
+
+        ### LINUX MEM ###
+
+        - source_match:
+            severity: critical
+            alertname: LinuxMEMCRITICALAlert
+          target_match:
+              severity: high
+              alertname: LinuxMEMHIGHAlert
+          equal: [ 'instance' ]
+        - source_match:
+            severity: critical
+            alertname: LinuxMEMCRITICALAlert
+          target_match:
+              severity: warning
+              alertname: LinuxMEMHIGHAlert
+          equal: [ 'instance' ]
+        - source_match:
+            severity: high
+            alertname: LinuxMEMHIGHAlert
+          target_match:
+              severity: warning
+              alertname: LinuxMEMHIGHAlert
+          equal: [ 'instance' ]
+
+        ### LINUX DISK ###
+
+        - source_match:
+            severity: critical
+            alertname: LinuxDiskCRITICALAlert
+          target_match:
+              severity: high
+              alertname: LinuxDiskHIGHAlert
+          equal: [ 'instance', 'mountpoint' ]
+        - source_match:
+            severity: critical
+            alertname: LinuxDiskCRITICALAlert
+          target_match:
+              severity: warning
+              alertname: LinuxDiskWARNINGAlert
+          equal: [ 'instance', 'mountpoint' ]
+        - source_match:
+            severity: high
+            alertname: LinuxDiskHIGHAlert
+          target_match:
+              severity: warning
+              alertname: LinuxDiskWARNINGAlert
+          equal: [ 'instance', 'mountpoint' ]
+
+        ### LINUX INODE ###
+
+        - source_match:
+            severity: critical
+            alertname: LinuxiNodeCRITICALAlert
+          target_match:
+              severity: high
+              alertname: LinuxiNodeHIGHAlert
+          equal: [ 'instance', 'mountpoint' ]
+        - source_match:
+            severity: critical
+            alertname: LinuxiNodeCRITICALAlert
+          target_match:
+              severity: warning
+              alertname: LinuxiNodeWARNINGAlert
+          equal: [ 'instance', 'mountpoint' ]
+        - source_match:
+            severity: high
+            alertname: LinuxiNodeHIGHAlert
+          target_match:
+              severity: warning
+              alertname: LinuxiNodeWARNINGAlert
+          equal: [ 'instance', 'mountpoint' ]
+
+        ### WINDOWS CPU ###
+
+        - source_match:
+            severity: critical
+            alertname: WindowsCPUCRITICALAlert
+          target_match:
+              severity: high
+              alertname: WindowsCPUHIGHAlert
+          equal: [ 'instance' ]
+        - source_match:
+            severity: critical
+            alertname: WindowsCPUCRITICALAlert
+          target_match:
+              severity: warning
+              alertname: WindowsCPUWARNINGAlert
+          equal: [ 'instance' ]
+        - source_match:
+            severity: high
+            alertname: WindowsCPUHIGHAlert
+          target_match:
+              severity: warning
+              alertname: WindowsCPUWARNINGAlert
+          equal: [ 'instance' ]
+
+        ### WINDOWS MEM ###
+
+        - source_match:
+            severity: critical
+            alertname: WindowsMEMCRITICALAlert
+          target_match:
+              severity: high
+              alertname: WindowsMEMHIGHAlert
+          equal: [ 'instance' ]
+        - source_match:
+            severity: critical
+            alertname: WindowsMEMCRITICALAlert
+          target_match:
+              severity: warning
+              alertname: WindowsMEMWARNINGAlert
+          equal: [ 'instance' ]
+        - source_match:
+            severity: high
+            alertname: WindowsMEMHIGHAlert
+          target_match:
+              severity: warning
+              alertname: WindowsMEMWARNINGAlert
+          equal: [ 'instance' ]
+
+        ### WINDOWS DISK ###
+
+        - source_match:
+            severity: critical
+            alertname: WindowsDiskCRITICALAlert
+          target_match:
+              severity: high
+              alertname: WindowsDiskHIGHAlert
+          equal: [ 'instance', 'volume' ]
+        - source_match:
+            severity: critical
+            alertname: WindowsDiskCRITICALAlert
+          target_match:
+              severity: warning
+              alertname: WindowsDiskWARNINGAlert
+          equal: [ 'instance', 'volume' ]
+        - source_match:
+            severity: high
+            alertname: WindowsDiskHIGHAlert
+          target_match:
+              severity: warning
+              alertname: WindowsDiskWARNINGAlert
+          equal: [ 'instance', 'volume' ]
+
+        ### RABBITMQ MESSAGES ###
+
+        - source_match:
+            severity: critical
+            alertname: RabbitMQMessagesOver30000
+          target_match:
+              severity: high
+              alertname: RabbitMQMessagesOver20000
+          equal: [ 'queue', 'vhost' ]
+        - source_match:
+            severity: critical
+            alertname: RabbitMQMessagesOver30000
+          target_match:
+              severity: warning
+              alertname: RabbitMQMessagesOver10000
+          equal: [ 'queue', 'vhost' ]
+        - source_match:
+            severity: high
+            alertname: RabbitMQMessagesOver20000
+          target_match:
+              severity: warning
+              alertname: RabbitMQMessagesOver10000
+          equal: [ 'queue', 'vhost' ]
+
+        ### ELASTICSEARCH DISKSPACE ###
+
+        - source_match:
+            severity: critical
+            alertname: ElasticsearchDiskSpaceLowCRITICAL
+          target_match:
+              severity: high
+              alertname: ElasticsearchDiskSpaceLowHIGH
+          equal: [ 'instance', 'cluster' ]
+        - source_match:
+            severity: critical
+            alertname: ElasticsearchDiskSpaceLowCRITICAL
+          target_match:
+              severity: warning
+              alertname: ElasticsearchDiskSpaceLowWARNING
+          equal: [ 'instance', 'cluster' ]
+        - source_match:
+            severity: high
+            alertname: ElasticsearchDiskSpaceLowHIGH
+          target_match:
+              severity: warning
+              alertname: ElasticsearchDiskSpaceLowWARNING
+          equal: [ 'instance', 'cluster' ]
+
+        ### ELASTICSEARCH CLUSTER STATUS ###
+
+        - source_match:
+            severity: critical
+            alertname: ElasticsearchClusterRED
+          target_match:
+              severity: high
+              alertname: ElasticsearchClusterYELLOW
+          equal: [ 'cluster' ]
+
+        ### ELASTICSEARCH RO INDICES ###
+
+        - source_match:
+            severity: critical
+            alertname: ESReadOnlyIndicesCRITICAL
+          target_match:
+              severity: high
+              alertname: ESReadOnlyIndicesHIGH
+          equal: [ 'cluster' ]
+        - source_match:
+            severity: critical
+            alertname: ESReadOnlyIndicesCRITICAL
+          target_match:
+              severity: warning
+              alertname: ESReadOnlyIndicesWARNING
+          equal: [ 'cluster' ]
+        - source_match:
+            severity: high
+            alertname: ESReadOnlyIndicesHIGH
+          target_match:
+              severity: warning
+              alertname: ESReadOnlyIndicesCRITICAL
+          equal: [ 'cluster' ]
+
+      route:
+        group_by: [...]
+        group_wait: 30s
+        group_interval: 5m
+        #      group_interval: 1m
+        repeat_interval: 12h
+        #      repeat_interval: 1m
+        #      receiver: 'slack'
+        routes:
+
+          - match:
+              team: 'data-team'
+            repeat_interval: 2h
+            receiver: data-pipeline-alerts
+            continue: false
+          - match:
+              category: 'pipeline-pulsar-alerts'
+            repeat_interval: 2h
+            receiver: pipeline-pulsar-alerts
+            continue: false
+          - match:
+              category: 'pipeline-general'
+            repeat_interval: 2h
+            receiver: pipeline-general
+            continue: false
+          - match:
+              category: 'pipeline-clickhouse'
+            repeat_interval: 2h
+            receiver: pipeline-clickhouse
+            continue: false
+          - match:
+              category: 'pipeline-logstash'
+            repeat_interval: 2h
+            receiver: pipeline-logstash
+            continue: false
+          - match:
+              category: 'pipeline-opensearch'
+            repeat_interval: 2h
+            receiver: pipeline-opensearch
+            continue: false
+          - match:
+              category: 'pipeline-pulsar-traffic'
+            repeat_interval: 2h
+            receiver: pipeline-pulsar-traffic
+            continue: false
+          - match:
+              category: 'pipeline-ingestion'
+            repeat_interval: 2h
+            receiver: pipeline-ingestion
+            continue: false
+
+          - match:
+              team: 'ninjas-team'
+            repeat_interval: 2h
+            receiver: ninjas-alerts
+            continue: false
+
+          - match_re:
+              pod: "auth-jwt-.*|.*-download-service-.*|.*-sink-.*|.*-events-demultiplexer-.*|ingestion-.*|opa-bundle-.*|.*opendistro-onboarding.*|.*-events-policies-.*|traffic-sampler-.*"
+            repeat_interval: 2h
+            receiver: pipeline-pulsar-traffic
+            continue: false
+
+          - match:
+              category: 'teams'
+            repeat_interval: 2h
+            receiver: nginx-alerts-critical
+            continue: true
+
+            # workaround to temporarily exclude CPU/MEM alerts from Teams critical chan
+          - match:
+              notify: 'low-priority'
+            repeat_interval: 2h
+            receiver: cysaas-low-priority-alerts
+            continue: false
+
+          - match:
+              notify: 'high-priority'
+            repeat_interval: 2h
+            receiver: cysaas-high-priority-alerts
+            continue: false
+
+          - match:
+              severity: critical
+            repeat_interval: 2h
+            receiver: cysaas-critical-alerts
+            continue: true
+
+          - match:
+              severity: high
+            repeat_interval: 3h
+            receiver: cysaas-high-priority-alerts
+            continue: true
+
+          - match:
+              severity: warning
+            repeat_interval: 5h
+            receiver: cysaas-low-priority-alerts
+            continue: true
+
+          - match:
+              severity: critical
+              no_auto_resolve: true
+            repeat_interval: 2h
+            receiver: opsgenie-critical-no-resolve
+            continue: true
+
+          - match:
+              severity: critical
+            repeat_interval: 2h
+            receiver: opsgenie-critical
+            continue: true
+
+          - match:
+              severity: high
+              no_auto_resolve: true
+            repeat_interval: 3h
+            receiver: opsgenie-high-no-resolve
+            continue: true
+
+          - match:
+              severity: high
+            repeat_interval: 3h
+            receiver: opsgenie-high
+            continue: true
+
+          - match:
+              severity: warning
+              no_auto_resolve: true
+            repeat_interval: 5h
+            receiver: opsgenie-warning-no-resolve
+            continue: true
+
+          - match:
+              severity: warning
+            repeat_interval: 5h
+            receiver: opsgenie-warning
+            continue: true
+
+    ingress:
+      enabled: true
+      ingressClassName: from-office
+#      annotations:
+        # external-dns.alpha.kubernetes.io/hostname: alertmanager{{ .Values.spec.dnsDomain }}
+        # external-dns.alpha.kubernetes.io/target: from-office{{ .Values.spec.dnsDomain }}
+      # hosts:
+      #   - alertmanager{{ .Values.spec.dnsDomain }}
+      pathType: Prefix
+
+  grafana:
+#    service:
+#    downloadDashboardsImage:
+#      repository: 243885107131.dkr.ecr.eu-west-1.amazonaws.com/curlimages/curl
+   # admin:
+   #   existingSecret: "prometheus-operator-grafana"
+   # envFromSecret: "prometheus-operator-grafana-env"
+
+    image:
+#      repository: 243885107131.dkr.ecr.eu-west-1.amazonaws.com/grafana/grafana
+#      tag: 7.3.4
+#    initChownData:
+#      image:
+#        repository: 243885107131.dkr.ecr.eu-west-1.amazonaws.com/busybox
+    imageRenderer:    # Check
+      enabled: true
+      image:
+#        repository: grafana/grafana-image-renderer
+        tag: 3.2.1
+
+    ingress:
+      enabled: true
+      ingressClassName: from-office
+      annotations:
+        nginx.ingress.kubernetes.io/auth-response-headers: X-Auth-Request-User,X-Auth-Request-Email,X-Auth-Request-Preferred-Username
+      pathType: Prefix
+    grafana.ini:
+      server:
+        root_url: "%(protocol)s://%(domain)s"
+      smtp:
+        enabled: true
+        host: postfix.postfix:25
+        from_address: internal@cynet.com
+        from_name: Grafana
+        skip_verify: true
+      auth.proxy:
+        enabled: true
+        header_name: X-Auth-Request-Email
+        header_property: email
+        auto_sign_up: true
+      users:
+        allow_sign_up: false
+        auto_assign_org: true
+        auto_assign_org_role: Viewer
+        viewers_can_edit: true
+
+    plugins:
+      - btplc-status-dot-panel
+      - camptocamp-prometheus-alertmanager-datasource
+      - flant-statusmap-panel
+#      - grafana-image-renderer   DO NOT USE!!!!!
+      - grafana-piechart-panel
+      - grafana-worldmap-panel
+      - vertamedia-clickhouse-datasource
+      - yesoreyeram-infinity-datasource
+
+    persistence:
+      enabled: true
+      type: statefulset
+      size: 5Gi
+
+    resources:
+#      limits:
+#        cpu: 50m
+#        memory: 256Mi
+      requests:
+        cpu: 30m
+        memory: 192Mi
+
+    podDisruptionBudget:
+      enabled: true
+      minAvailable: 1
+
+    serviceAccount:
+      create: false
+      name: prometheus-operator-grafana
+
+    additionalDataSources:
+      - name: Loki
+        type: loki
+        url: http://loki-stack:3100
+        access: proxy
+        isDefault: false
+      - name: clickhouse-mitre2021
+        type: vertamedia-clickhouse-datasource
+        url: http://clickhouse-clickhouse.mitre2021.svc.cluster.local:8123
+        isDefault: false
+        basicAuth: true
+        basicAuthPassword: pronto
+        basicAuthUser: monitor
+        editable: false
+      - name: Victoria
+        type: prometheus
+        url: http://victoria-metrics:8428/
+        access: proxy
+        isDefault: false
+      - name: Victoria
+        type: prometheus
+        url: http://victoria-metrics:8428/
+        access: proxy
+        isDefault: false
+        editable: true
+      - name: VictoriaMetrics
+        type: prometheus
+        url: http://victoria-metrics:8428/
+        access: proxy
+        isDefault: false
+        editable: true
+
+    sidecar:
+
+      dashboards:
+        enabled: true
+
+#      datasources:
+#        defaultDatasourceEnabled: false
+#        createPrometheusReplicasDatasources: true
+#      image:
+#        repository: 243885107131.dkr.ecr.eu-west-1.amazonaws.com/kiwigrid/k8s-sidecar
+
+      resources:
+#        limits:
+#          cpu: 30m
+#          memory: 192Mi
+        requests:
+          cpu: 20m
+          memory: 128Mi
+
+  prometheusOperator:
+    configReloaderMemory: 200Mi
+    enabled: true
+#    admissionWebhooks:
+#      patch:
+#        image:
+#          repository: 243885107131.dkr.ecr.eu-west-1.amazonaws.com/jettech/kube-webhook-certgen
+#    configmapReloadImage:
+#      repository: 243885107131.dkr.ecr.eu-west-1.amazonaws.com/jimmidyson/configmap-reload
+    resources:
+#      limits:
+#        cpu: 30m
+#        memory: 150Mi
+      requests:
+        cpu: 30m
+        memory: 150Mi
+    tlsProxy:
+#      image:
+#        repository: 243885107131.dkr.ecr.eu-west-1.amazonaws.com/squareup/ghostunnel
+      resources:
+#        limits:
+#          cpu: 30m
+#          memory: 150Mi
+        requests:
+          cpu: 30m
+          memory: 150Mi
+
+  kubeControllerManager:
+    enabled: false
+
+  kubeScheduler:
+    enabled: false
+
+
+
+  prometheus:
+    prometheusSpec:
+      serviceMonitorSelector:
+        matchLabels:
+          release: prometheus-operator
+      enableAdminAPI: true
+      resources:
+#        limits:
+#          cpu: null
+#          memory: null
+        requests:
+          cpu: "2"
+          memory: 8Gi
+      #    logLevel: debug
+      retentionSize: 60GB
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 100Gi
+      #        selector: {}
+      ruleSelector:
+        matchLabels:
+          release: prometheus-operator
+#      walCompression: true
+#      retention: 7d
+
+    ingress:
+      enabled: true
+      ingressClassName: from-office
+      pathType: Prefix
+    podDisruptionBudget:
+      enabled: true
+      minAvailable: 1
+
+  kube-state-metrics:
+    prometheus:
+      monitor:
+        additionalLabels:
+          release: prometheus-operator
+    resources:
+#      limits:
+#        cpu: 50m
+#        memory: 280Mi
+      requests:
+        cpu: 50m
+        memory: 280Mi
+    collectors:
+      - certificatesigningrequests
+      - configmaps
+      - cronjobs
+      - daemonsets
+      - deployments
+      - endpoints
+      - horizontalpodautoscalers
+      - ingresses
+      - jobs
+      - limitranges
+      - mutatingwebhookconfigurations
+      - namespaces
+      - networkpolicies
+      - nodes
+      - persistentvolumeclaims
+      - persistentvolumes
+      - poddisruptionbudgets
+      - pods
+      - replicasets
+      - replicationcontrollers
+      - resourcequotas
+      - secrets
+      - services
+      - statefulsets
+      - storageclasses
+      - validatingwebhookconfigurations
+      - volumeattachments
+      - verticalpodautoscalers
+
+###########################################################################
+
+prometheus-msteams:
+  enabled: true
+
+  connectors:
+  # in alertmanager, this will be used as http://prometheus-msteams:2000/cysaas-alerts
+  - cysaas-critical-alerts: https://cyberspear.webhook.office.com/webhookb2/cc395a09-f815-4e2c-9f5b-5699e9b7c87a@0bfc70e2-75af-4bc4-ba4c-4800067c97b8/IncomingWebhook/a9cdc197761545df8264ac00f4d0a97b/be3f28a2-872e-4f6d-a100-d28896e118fa
+  - cysaas-low-priority-alerts: https://cyberspear.webhook.office.com/webhookb2/cc395a09-f815-4e2c-9f5b-5699e9b7c87a@0bfc70e2-75af-4bc4-ba4c-4800067c97b8/IncomingWebhook/dafbdb7a2a5a432699c3f246569f292c/be3f28a2-872e-4f6d-a100-d28896e118fa
+  - cysaas-high-priority-alerts: https://cyberspear.webhook.office.com/webhookb2/cc395a09-f815-4e2c-9f5b-5699e9b7c87a@0bfc70e2-75af-4bc4-ba4c-4800067c97b8/IncomingWebhook/8ac243208ad747e69a718d62c4b9bc7f/be3f28a2-872e-4f6d-a100-d28896e118fa
+  - data-pipeline-alerts: https://cyberspear.webhook.office.com/webhookb2/cc395a09-f815-4e2c-9f5b-5699e9b7c87a@0bfc70e2-75af-4bc4-ba4c-4800067c97b8/IncomingWebhook/7799c161e43f4734b8719246a39f9c91/bb88a0a9-07cd-4f73-9420-075d008942a9
+  - ninjas-alerts: https://cyberspear.webhook.office.com/webhookb2/cc395a09-f815-4e2c-9f5b-5699e9b7c87a@0bfc70e2-75af-4bc4-ba4c-4800067c97b8/IncomingWebhook/9925c1e03db24ca485c07889922eb9ac/be6024ae-6f6e-474f-9c7f-218a34a28c6e
+  - pipeline-pulsar-alerts: https://cyberspear.webhook.office.com/webhookb2/847ebf72-8e07-48af-ad9f-783235960781@0bfc70e2-75af-4bc4-ba4c-4800067c97b8/IncomingWebhook/fe35dfbee22744a6904d77f1ac999519/78e92a84-9e99-4987-b914-b7b0acf61d36
+  - pipeline-general: https://cyberspear.webhook.office.com/webhookb2/847ebf72-8e07-48af-ad9f-783235960781@0bfc70e2-75af-4bc4-ba4c-4800067c97b8/IncomingWebhook/12be82c4a4b543b28a74f7c749b7c73b/78e92a84-9e99-4987-b914-b7b0acf61d36
+  - pipeline-clickhouse: https://cyberspear.webhook.office.com/webhookb2/847ebf72-8e07-48af-ad9f-783235960781@0bfc70e2-75af-4bc4-ba4c-4800067c97b8/IncomingWebhook/fd7df814bcc940669d3d54e1aed7daff/78e92a84-9e99-4987-b914-b7b0acf61d36
+  - pipeline-logstash: https://cyberspear.webhook.office.com/webhookb2/847ebf72-8e07-48af-ad9f-783235960781@0bfc70e2-75af-4bc4-ba4c-4800067c97b8/IncomingWebhook/9b5dfa6025614ca9b7c9f726c6122069/78e92a84-9e99-4987-b914-b7b0acf61d36
+  - pipeline-opensearch: https://cyberspear.webhook.office.com/webhookb2/847ebf72-8e07-48af-ad9f-783235960781@0bfc70e2-75af-4bc4-ba4c-4800067c97b8/IncomingWebhook/c6d5d4fb07a6442083bf651655a36dbd/78e92a84-9e99-4987-b914-b7b0acf61d36
+  - pipeline-pulsar-traffic: https://cyberspear.webhook.office.com/webhookb2/847ebf72-8e07-48af-ad9f-783235960781@0bfc70e2-75af-4bc4-ba4c-4800067c97b8/IncomingWebhook/99206bf54e284ab99717dbd9f856c85f/78e92a84-9e99-4987-b914-b7b0acf61d36
+  - pipeline-ingestion: https://cyberspear.webhook.office.com/webhookb2/847ebf72-8e07-48af-ad9f-783235960781@0bfc70e2-75af-4bc4-ba4c-4800067c97b8/IncomingWebhook/2761991bae7548978c429055e436e261/78e92a84-9e99-4987-b914-b7b0acf61d36
+  - nginx-alerts-critical: https://cyberspear.webhook.office.com/webhookb2/35d3bd07-3ff0-4f6c-8b3e-b3bc5bb73d68@0bfc70e2-75af-4bc4-ba4c-4800067c97b8/IncomingWebhook/c83eae4f1ce6415da63f9277a5079509/fa94df0d-f324-43a4-a593-09f1eb02c269
+  # in alertmanager, this will be used as http://prometheus-msteams:2000/foo
+  #- foo: https://outlook.office.com/webhook/xxxx/xxxx
+
+  # extraEnvs is useful for adding extra environment variables such as proxy settings
+  #extraEnvs:
+  #  HTTP_PROXY: http://corporateproxy:8080
+  #  HTTPS_PROXY: http://corporateproxy:8080
+  container:
+    additionalArgs:
+      - -debug
+
+  # Enable metrics for prometheus operator
+  metrics:
+    serviceMonitor:
+      enabled: true
+      additionalLabels:
+        release: prometheus-operator
+      scrapeInterval: 30s
+
+  customCardTemplate: |
+    {{ define "teams.card" }}
+    {
+      "@type": "MessageCard",
+      "@context": "http://schema.org/extensions",
+      "themeColor": "{{- if eq .Status "resolved" -}}2DC72D
+                     {{- else if eq .Status "firing" -}}
+                        {{- if eq .CommonLabels.severity "critical" -}}8C1A1A
+                        {{- else if eq .CommonLabels.severity "warning" -}}FFA500
+                        {{- else -}}808080{{- end -}}
+                     {{- else -}}808080{{- end -}}",
+      "summary": "{{- if eq .CommonAnnotations.summary "" -}}
+                      {{- if eq .CommonAnnotations.message "" -}}
+                        {{- if eq .CommonLabels.alertname "" -}}
+                          Prometheus Alert
+                        {{- else -}}
+                          {{- .CommonLabels.alertname -}}
+                        {{- end -}}
+                      {{- else -}}
+                        {{- .CommonAnnotations.message -}}
+                      {{- end -}}
+                  {{- else -}}
+                      {{- .CommonAnnotations.summary -}}
+                  {{- end -}}",
+      "title": "Prometheus Alert ({{ .Status | title }})",
+      "sections": [ {{$externalUrl := .ExternalURL}}
+      {{- range $index, $alert := .Alerts }}{{- if $index }},{{- end }}
+        {
+          "activityTitle": "[{{ $alert.Annotations.description }}]({{ $externalUrl }})",
+          "facts": [
+            {{- range $key, $value := $alert.Annotations }}
+            {
+              "name": "{{ $key }}",
+              "value": "{{ $value }}"
+            },
+            {{- end -}}
+            {{$c := counter}}{{ range $key, $value := $alert.Labels }}{{if call $c}},{{ end }}
+            {
+              "name": "{{ $key }}",
+              "value": "{{ $value }}"
+            }
+            {{- end }}
+          ],
+          "markdown": true
+        }
+        {{- end }}
+      ]
+    }
+    {{ end }}
+
+####################################################
+
+vertical-pod-autoscaler:
+  admissionController:
+    resources:
+      requests:
+        cpu: 25m
+        memory: 256Mi
+
+  recommender:
+    resources:
+      requests:
+        cpu: 25m
+        memory: 256Mi
+
+  updater:
+    enabled: false
+
+####################################################
+
+victoria-metrics-single:
+  enabled: true
+  server:
+    fullnameOverride: victoria-metrics
+    retentionPeriod: 12
+    serviceMonitor:
+      enabled: true
+      extraLabels:
+        release: prometheus-operator
+    persistentVolume:
+      size: 150G
+      storageClass: cynet-logging
+    resources:
+      requests:
+        cpu: 2
+        memory: 12Gi
+

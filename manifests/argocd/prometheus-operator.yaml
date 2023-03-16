@@ -18,7 +18,7 @@ spec:
     path: helm-charts/kube-prometheus-stack
     helm:
       valueFiles:
-      - values.yaml
+      - cynet-values.yaml
       # values: |   
       #   prometheusOperator:
       #     admissionWebhooks:
