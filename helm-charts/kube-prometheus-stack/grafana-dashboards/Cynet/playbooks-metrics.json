@@ -1,0 +1,1504 @@
+﻿{
+	"annotations": {
+		"list": [
+			{
+				"builtIn": 1,
+				"datasource": "-- Grafana --",
+				"enable": true,
+				"hide": true,
+				"iconColor": "rgba(0, 211, 255, 1)",
+				"name": "Annotations & Alerts",
+				"target": {
+					"limit": 100,
+					"matchAny": false,
+					"tags": [],
+					"type": "dashboard"
+				},
+				"type": "dashboard"
+			}
+		]
+	},
+	"editable": true,
+	"fiscalYearStartMonth": 0,
+	"graphTooltip": 0,
+	"iteration": 1650634795678,
+	"links": [],
+	"liveNow": false,
+	"panels": [
+		{
+			"collapsed": false,
+			"gridPos": {
+				"h": 1,
+				"w": 24,
+				"x": 0,
+				"y": 0
+			},
+			"id": 16,
+			"panels": [],
+			"title": "Api metrics",
+			"type": "row"
+		},
+		{
+			"aliasColors": {},
+			"bars": false,
+			"dashLength": 10,
+			"dashes": false,
+			"fill": 1,
+			"fillGradient": 0,
+			"gridPos": {
+				"h": 8,
+				"w": 12,
+				"x": 0,
+				"y": 1
+			},
+			"hiddenSeries": false,
+			"id": 10,
+			"legend": {
+				"alignAsTable": true,
+				"avg": true,
+				"current": true,
+				"max": true,
+				"min": true,
+				"show": true,
+				"total": true,
+				"values": true
+			},
+			"lines": true,
+			"linewidth": 1,
+			"nullPointMode": "null",
+			"options": {
+				"alertThreshold": true
+			},
+			"percentage": false,
+			"pluginVersion": "8.4.2",
+			"pointradius": 2,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [],
+			"spaceLength": 10,
+			"stack": false,
+			"steppedLine": false,
+			"targets": [
+				{
+					"expr": "sum(increase(api_timing_count{service=\"playbooks\"}[1m])) by (tenant, client, url_tpl, http_code)",
+					"instant": false,
+					"interval": "",
+					"legendFormat": "{{tenant}} {{client}} {{url_tpl}} {{http_code}}",
+					"refId": "A"
+				}
+			],
+			"thresholds": [],
+			"timeRegions": [],
+			"title": "API requests",
+			"tooltip": {
+				"shared": true,
+				"sort": 0,
+				"value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+				"mode": "time",
+				"show": true,
+				"values": []
+			},
+			"yaxes": [
+				{
+					"format": "short",
+					"logBase": 1,
+					"show": true
+				},
+				{
+					"format": "short",
+					"logBase": 1,
+					"show": true
+				}
+			],
+			"yaxis": {
+				"align": false
+			}
+		},
+		{
+			"aliasColors": {},
+			"bars": false,
+			"dashLength": 10,
+			"dashes": false,
+			"fill": 1,
+			"fillGradient": 0,
+			"gridPos": {
+				"h": 8,
+				"w": 12,
+				"x": 12,
+				"y": 1
+			},
+			"hiddenSeries": false,
+			"id": 12,
+			"legend": {
+				"alignAsTable": true,
+				"avg": true,
+				"current": true,
+				"max": true,
+				"min": true,
+				"show": true,
+				"total": true,
+				"values": true
+			},
+			"lines": true,
+			"linewidth": 1,
+			"nullPointMode": "null",
+			"options": {
+				"alertThreshold": true
+			},
+			"percentage": false,
+			"pluginVersion": "8.4.2",
+			"pointradius": 2,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [],
+			"spaceLength": 10,
+			"stack": false,
+			"steppedLine": false,
+			"targets": [
+				{
+					"datasource": {
+						"type": "prometheus",
+						"uid": "prometheus"
+					},
+					"exemplar": true,
+					"expr": "avg(api_timing_sum{service=\"playbooks\"}/api_timing_count{service=\"playbooks\"}) by (client, method, url_tpl)",
+					"interval": "",
+					"legendFormat": "{{tenant}} {{client}} {{method}} {{url_tpl}}",
+					"refId": "A"
+				}
+			],
+			"thresholds": [],
+			"timeRegions": [],
+			"title": "API timing",
+			"tooltip": {
+				"shared": true,
+				"sort": 0,
+				"value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+				"mode": "time",
+				"show": true,
+				"values": []
+			},
+			"yaxes": [
+				{
+					"format": "short",
+					"logBase": 1,
+					"show": true
+				},
+				{
+					"format": "short",
+					"logBase": 1,
+					"show": true
+				}
+			],
+			"yaxis": {
+				"align": false
+			}
+		},
+		{
+			"aliasColors": {},
+			"bars": false,
+			"dashLength": 10,
+			"dashes": false,
+			"fill": 1,
+			"fillGradient": 0,
+			"gridPos": {
+				"h": 9,
+				"w": 12,
+				"x": 0,
+				"y": 9
+			},
+			"hiddenSeries": false,
+			"id": 8,
+			"legend": {
+				"alignAsTable": true,
+				"avg": false,
+				"current": true,
+				"max": true,
+				"min": false,
+				"rightSide": false,
+				"show": true,
+				"total": true,
+				"values": true
+			},
+			"lines": true,
+			"linewidth": 1,
+			"nullPointMode": "null",
+			"options": {
+				"alertThreshold": true
+			},
+			"percentage": false,
+			"pluginVersion": "8.4.2",
+			"pointradius": 2,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [],
+			"spaceLength": 10,
+			"stack": false,
+			"steppedLine": false,
+			"targets": [
+				{
+					"datasource": {
+						"type": "prometheus",
+						"uid": "prometheus"
+					},
+					"expr": "sum(increase(api_error_counter{service=\"playbooks\"}[1m])) by (tenant, client, key, code)",
+					"interval": "",
+					"legendFormat": "{{tenant}} {{client}} {{key}} {{code}}",
+					"refId": "A"
+				}
+			],
+			"thresholds": [],
+			"timeRegions": [],
+			"title": "API errors",
+			"tooltip": {
+				"shared": true,
+				"sort": 0,
+				"value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+				"mode": "time",
+				"show": true,
+				"values": []
+			},
+			"yaxes": [
+				{
+					"format": "short",
+					"logBase": 1,
+					"show": true
+				},
+				{
+					"format": "short",
+					"logBase": 1,
+					"show": true
+				}
+			],
+			"yaxis": {
+				"align": false
+			}
+		},
+		{
+			"cards": {},
+			"color": {
+				"cardColor": "#b4ff00",
+				"colorScale": "sqrt",
+				"colorScheme": "interpolatePlasma",
+				"exponent": 0.5,
+				"mode": "spectrum"
+			},
+			"dataFormat": "tsbuckets",
+			"description": "API timing (ms)",
+			"gridPos": {
+				"h": 9,
+				"w": 12,
+				"x": 12,
+				"y": 9
+			},
+			"heatmap": {},
+			"hideZeroBuckets": false,
+			"highlightCards": true,
+			"id": 33,
+			"legend": {
+				"show": true
+			},
+			"links": [],
+			"reverseYBuckets": false,
+			"targets": [
+				{
+					"datasource": {
+						"type": "prometheus",
+						"uid": "prometheus"
+					},
+					"exemplar": true,
+					"expr": "sum(increase(api_timing_bucket{service=\"playbooks\"}[10m])) by (le)",
+					"format": "heatmap",
+					"instant": false,
+					"interval": "",
+					"intervalFactor": 1,
+					"legendFormat": "{{le}} ms",
+					"refId": "A"
+				}
+			],
+			"title": "API timing",
+			"tooltip": {
+				"show": true,
+				"showHistogram": false
+			},
+			"type": "heatmap",
+			"xAxis": {
+				"show": true
+			},
+			"yAxis": {
+				"format": "short",
+				"logBase": 1,
+				"show": true
+			},
+			"yBucketBound": "auto"
+		},
+		{
+			"collapsed": false,
+			"gridPos": {
+				"h": 1,
+				"w": 24,
+				"x": 0,
+				"y": 18
+			},
+			"id": 6,
+			"panels": [],
+			"title": "service metrics",
+			"type": "row"
+		},
+		{
+			"aliasColors": {},
+			"bars": false,
+			"dashLength": 10,
+			"dashes": false,
+			"fill": 1,
+			"fillGradient": 0,
+			"gridPos": {
+				"h": 9,
+				"w": 12,
+				"x": 0,
+				"y": 19
+			},
+			"hiddenSeries": false,
+			"id": 14,
+			"legend": {
+				"avg": false,
+				"current": false,
+				"max": false,
+				"min": false,
+				"show": true,
+				"total": false,
+				"values": false
+			},
+			"lines": true,
+			"linewidth": 1,
+			"nullPointMode": "null",
+			"options": {
+				"alertThreshold": true
+			},
+			"percentage": false,
+			"pluginVersion": "8.4.2",
+			"pointradius": 2,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [],
+			"spaceLength": 10,
+			"stack": false,
+			"steppedLine": false,
+			"targets": [
+				{
+					"datasource": {
+						"type": "prometheus",
+						"uid": "prometheus"
+					},
+					"expr": "sum(increase(service_error_counter{service=\"playbooks\"}[1m])) by (tenant, client, key)",
+					"interval": "",
+					"legendFormat": "{{tenant}} {{client}} {{key}}",
+					"refId": "A"
+				}
+			],
+			"thresholds": [],
+			"timeRegions": [],
+			"title": "Service errors",
+			"tooltip": {
+				"shared": true,
+				"sort": 0,
+				"value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+				"mode": "time",
+				"show": true,
+				"values": []
+			},
+			"yaxes": [
+				{
+					"format": "short",
+					"logBase": 1,
+					"show": true
+				},
+				{
+					"format": "short",
+					"logBase": 1,
+					"show": true
+				}
+			],
+			"yaxis": {
+				"align": false
+			}
+		},
+		{
+			"collapsed": true,
+			"gridPos": {
+				"h": 1,
+				"w": 24,
+				"x": 0,
+				"y": 28
+			},
+			"id": 2,
+			"panels": [
+				{
+					"aliasColors": {},
+					"bars": false,
+					"dashLength": 10,
+					"dashes": false,
+					"fill": 1,
+					"fillGradient": 0,
+					"gridPos": {
+						"h": 8,
+						"w": 9,
+						"x": 0,
+						"y": 12
+					},
+					"hiddenSeries": false,
+					"id": 4,
+					"legend": {
+						"alignAsTable": true,
+						"avg": true,
+						"current": true,
+						"max": true,
+						"min": true,
+						"show": true,
+						"total": false,
+						"values": true
+					},
+					"lines": true,
+					"linewidth": 1,
+					"nullPointMode": "null",
+					"options": {
+						"alertThreshold": true
+					},
+					"percentage": false,
+					"pluginVersion": "8.4.2",
+					"pointradius": 2,
+					"points": false,
+					"renderer": "flot",
+					"seriesOverrides": [],
+					"spaceLength": 10,
+					"stack": false,
+					"steppedLine": false,
+					"targets": [
+						{
+							"expr": "sum(process_runtime_go_goroutines{service=\"playbooks\"}) by (pod)",
+							"interval": "",
+							"legendFormat": "{{pod}}",
+							"refId": "A"
+						}
+					],
+					"thresholds": [],
+					"timeRegions": [],
+					"title": "Number of goroutines that currently exist",
+					"tooltip": {
+						"shared": true,
+						"sort": 0,
+						"value_type": "individual"
+					},
+					"type": "graph",
+					"xaxis": {
+						"mode": "time",
+						"show": true,
+						"values": []
+					},
+					"yaxes": [
+						{
+							"format": "short",
+							"logBase": 1,
+							"show": true
+						},
+						{
+							"format": "short",
+							"logBase": 1,
+							"show": true
+						}
+					],
+					"yaxis": {
+						"align": false
+					}
+				},
+				{
+					"aliasColors": {},
+					"bars": false,
+					"dashLength": 10,
+					"dashes": false,
+					"fill": 1,
+					"fillGradient": 0,
+					"gridPos": {
+						"h": 8,
+						"w": 8,
+						"x": 9,
+						"y": 12
+					},
+					"hiddenSeries": false,
+					"id": 19,
+					"legend": {
+						"alignAsTable": true,
+						"avg": false,
+						"current": true,
+						"max": false,
+						"min": false,
+						"show": true,
+						"total": false,
+						"values": true
+					},
+					"lines": true,
+					"linewidth": 1,
+					"nullPointMode": "null",
+					"options": {
+						"alertThreshold": true
+					},
+					"percentage": false,
+					"pluginVersion": "8.4.2",
+					"pointradius": 2,
+					"points": false,
+					"renderer": "flot",
+					"seriesOverrides": [],
+					"spaceLength": 10,
+					"stack": false,
+					"steppedLine": false,
+					"targets": [
+						{
+							"expr": "sum(runtime_uptime{service=\"playbooks\"}) by (pod) / 1000",
+							"interval": "",
+							"legendFormat": "{{pod}}",
+							"refId": "A"
+						}
+					],
+					"thresholds": [],
+					"timeRegions": [],
+					"title": "Uptime (second)",
+					"tooltip": {
+						"shared": true,
+						"sort": 0,
+						"value_type": "individual"
+					},
+					"type": "graph",
+					"xaxis": {
+						"mode": "time",
+						"show": true,
+						"values": []
+					},
+					"yaxes": [
+						{
+							"format": "short",
+							"logBase": 1,
+							"show": true
+						},
+						{
+							"format": "short",
+							"logBase": 1,
+							"show": true
+						}
+					],
+					"yaxis": {
+						"align": false
+					}
+				},
+				{
+					"aliasColors": {},
+					"bars": false,
+					"dashLength": 10,
+					"dashes": false,
+					"description": "",
+					"fill": 1,
+					"fillGradient": 0,
+					"gridPos": {
+						"h": 8,
+						"w": 7,
+						"x": 17,
+						"y": 12
+					},
+					"hiddenSeries": false,
+					"id": 30,
+					"legend": {
+						"alignAsTable": true,
+						"avg": true,
+						"current": true,
+						"max": true,
+						"min": true,
+						"show": true,
+						"total": false,
+						"values": true
+					},
+					"lines": true,
+					"linewidth": 1,
+					"nullPointMode": "null",
+					"options": {
+						"alertThreshold": true
+					},
+					"percentage": false,
+					"pluginVersion": "8.4.2",
+					"pointradius": 2,
+					"points": false,
+					"renderer": "flot",
+					"seriesOverrides": [],
+					"spaceLength": 10,
+					"stack": false,
+					"steppedLine": false,
+					"targets": [
+						{
+							"expr": "sum(process_runtime_go_mem_live_objects{service=\"playbooks\"}) by (pod)",
+							"interval": "",
+							"legendFormat": "{{pod}}",
+							"refId": "A"
+						}
+					],
+					"thresholds": [],
+					"timeRegions": [],
+					"title": "Number of live objects is the number of cumulative Mallocs - Frees",
+					"tooltip": {
+						"shared": true,
+						"sort": 0,
+						"value_type": "individual"
+					},
+					"type": "graph",
+					"xaxis": {
+						"mode": "time",
+						"show": true,
+						"values": []
+					},
+					"yaxes": [
+						{
+							"format": "short",
+							"logBase": 1,
+							"show": true
+						},
+						{
+							"format": "short",
+							"logBase": 1,
+							"show": true
+						}
+					],
+					"yaxis": {
+						"align": false
+					}
+				},
+				{
+					"aliasColors": {},
+					"bars": false,
+					"dashLength": 10,
+					"dashes": false,
+					"fill": 1,
+					"fillGradient": 0,
+					"gridPos": {
+						"h": 8,
+						"w": 12,
+						"x": 0,
+						"y": 20
+					},
+					"hiddenSeries": false,
+					"id": 20,
+					"legend": {
+						"alignAsTable": true,
+						"avg": true,
+						"current": true,
+						"max": true,
+						"min": true,
+						"show": true,
+						"total": false,
+						"values": true
+					},
+					"lines": true,
+					"linewidth": 1,
+					"nullPointMode": "null",
+					"options": {
+						"alertThreshold": true
+					},
+					"percentage": false,
+					"pluginVersion": "8.4.2",
+					"pointradius": 2,
+					"points": false,
+					"renderer": "flot",
+					"seriesOverrides": [],
+					"spaceLength": 10,
+					"stack": false,
+					"steppedLine": false,
+					"targets": [
+						{
+							"expr": "sum(process_runtime_go_mem_heap_alloc{service=\"playbooks\"}) by (pod) / 1048576",
+							"interval": "",
+							"legendFormat": "{{pod}}",
+							"refId": "A"
+						}
+					],
+					"thresholds": [],
+					"timeRegions": [],
+					"title": "MB of allocated heap objects",
+					"tooltip": {
+						"shared": true,
+						"sort": 0,
+						"value_type": "individual"
+					},
+					"type": "graph",
+					"xaxis": {
+						"mode": "time",
+						"show": true,
+						"values": []
+					},
+					"yaxes": [
+						{
+							"format": "short",
+							"logBase": 1,
+							"show": true
+						},
+						{
+							"format": "short",
+							"logBase": 1,
+							"show": true
+						}
+					],
+					"yaxis": {
+						"align": false
+					}
+				},
+				{
+					"aliasColors": {},
+					"bars": false,
+					"dashLength": 10,
+					"dashes": false,
+					"fill": 1,
+					"fillGradient": 0,
+					"gridPos": {
+						"h": 8,
+						"w": 12,
+						"x": 12,
+						"y": 20
+					},
+					"hiddenSeries": false,
+					"id": 27,
+					"legend": {
+						"alignAsTable": true,
+						"avg": true,
+						"current": true,
+						"max": true,
+						"min": true,
+						"show": true,
+						"total": false,
+						"values": true
+					},
+					"lines": true,
+					"linewidth": 1,
+					"nullPointMode": "null",
+					"options": {
+						"alertThreshold": true
+					},
+					"percentage": false,
+					"pluginVersion": "8.4.2",
+					"pointradius": 2,
+					"points": false,
+					"renderer": "flot",
+					"seriesOverrides": [],
+					"spaceLength": 10,
+					"stack": false,
+					"steppedLine": false,
+					"targets": [
+						{
+							"expr": "sum(process_runtime_go_mem_heap_objects{service=\"playbooks\"}) by (pod)",
+							"interval": "",
+							"legendFormat": "{{pod}}",
+							"refId": "A"
+						}
+					],
+					"thresholds": [],
+					"timeRegions": [],
+					"title": "Number of allocated heap objects",
+					"tooltip": {
+						"shared": true,
+						"sort": 0,
+						"value_type": "individual"
+					},
+					"type": "graph",
+					"xaxis": {
+						"mode": "time",
+						"show": true,
+						"values": []
+					},
+					"yaxes": [
+						{
+							"format": "short",
+							"logBase": 1,
+							"show": true
+						},
+						{
+							"format": "short",
+							"logBase": 1,
+							"show": true
+						}
+					],
+					"yaxis": {
+						"align": false
+					}
+				},
+				{
+					"aliasColors": {},
+					"bars": false,
+					"dashLength": 10,
+					"dashes": false,
+					"fill": 1,
+					"fillGradient": 0,
+					"gridPos": {
+						"h": 8,
+						"w": 6,
+						"x": 0,
+						"y": 28
+					},
+					"hiddenSeries": false,
+					"id": 26,
+					"legend": {
+						"alignAsTable": true,
+						"avg": true,
+						"current": true,
+						"max": true,
+						"min": true,
+						"show": true,
+						"total": false,
+						"values": true
+					},
+					"lines": true,
+					"linewidth": 1,
+					"nullPointMode": "null",
+					"options": {
+						"alertThreshold": true
+					},
+					"percentage": false,
+					"pluginVersion": "8.4.2",
+					"pointradius": 2,
+					"points": false,
+					"renderer": "flot",
+					"seriesOverrides": [],
+					"spaceLength": 10,
+					"stack": false,
+					"steppedLine": false,
+					"targets": [
+						{
+							"expr": "sum(process_runtime_go_mem_heap_inuse{service=\"playbooks\"}) by (pod) / 1048576",
+							"interval": "",
+							"legendFormat": "{{pod}}",
+							"refId": "A"
+						}
+					],
+					"thresholds": [],
+					"timeRegions": [],
+					"title": "MB in in-use spans",
+					"tooltip": {
+						"shared": true,
+						"sort": 0,
+						"value_type": "individual"
+					},
+					"type": "graph",
+					"xaxis": {
+						"mode": "time",
+						"show": true,
+						"values": []
+					},
+					"yaxes": [
+						{
+							"format": "short",
+							"logBase": 1,
+							"show": true
+						},
+						{
+							"format": "short",
+							"logBase": 1,
+							"show": true
+						}
+					],
+					"yaxis": {
+						"align": false
+					}
+				},
+				{
+					"aliasColors": {},
+					"bars": false,
+					"dashLength": 10,
+					"dashes": false,
+					"description": "",
+					"fill": 1,
+					"fillGradient": 0,
+					"gridPos": {
+						"h": 8,
+						"w": 6,
+						"x": 6,
+						"y": 28
+					},
+					"hiddenSeries": false,
+					"id": 29,
+					"legend": {
+						"alignAsTable": true,
+						"avg": true,
+						"current": true,
+						"max": true,
+						"min": true,
+						"show": true,
+						"total": false,
+						"values": true
+					},
+					"lines": true,
+					"linewidth": 1,
+					"nullPointMode": "null",
+					"options": {
+						"alertThreshold": true
+					},
+					"percentage": false,
+					"pluginVersion": "8.4.2",
+					"pointradius": 2,
+					"points": false,
+					"renderer": "flot",
+					"seriesOverrides": [],
+					"spaceLength": 10,
+					"stack": false,
+					"steppedLine": false,
+					"targets": [
+						{
+							"expr": "sum(process_runtime_go_mem_heap_sys{service=\"playbooks\"}) by (pod) / 1048576",
+							"interval": "",
+							"legendFormat": "{{pod}}",
+							"refId": "A"
+						}
+					],
+					"thresholds": [],
+					"timeRegions": [],
+					"title": "MB of heap memory obtained from the OS",
+					"tooltip": {
+						"shared": true,
+						"sort": 0,
+						"value_type": "individual"
+					},
+					"type": "graph",
+					"xaxis": {
+						"mode": "time",
+						"show": true,
+						"values": []
+					},
+					"yaxes": [
+						{
+							"format": "short",
+							"logBase": 1,
+							"show": true
+						},
+						{
+							"format": "short",
+							"logBase": 1,
+							"show": true
+						}
+					],
+					"yaxis": {
+						"align": false
+					}
+				},
+				{
+					"aliasColors": {},
+					"bars": false,
+					"dashLength": 10,
+					"dashes": false,
+					"fill": 1,
+					"fillGradient": 0,
+					"gridPos": {
+						"h": 8,
+						"w": 6,
+						"x": 12,
+						"y": 28
+					},
+					"hiddenSeries": false,
+					"id": 28,
+					"legend": {
+						"alignAsTable": true,
+						"avg": true,
+						"current": true,
+						"max": true,
+						"min": true,
+						"show": true,
+						"total": false,
+						"values": true
+					},
+					"lines": true,
+					"linewidth": 1,
+					"nullPointMode": "null",
+					"options": {
+						"alertThreshold": true
+					},
+					"percentage": false,
+					"pluginVersion": "8.4.2",
+					"pointradius": 2,
+					"points": false,
+					"renderer": "flot",
+					"seriesOverrides": [],
+					"spaceLength": 10,
+					"stack": false,
+					"steppedLine": false,
+					"targets": [
+						{
+							"expr": "sum(process_runtime_go_mem_heap_released{service=\"playbooks\"}) by (pod) / 1048576",
+							"interval": "",
+							"legendFormat": "{{pod}}",
+							"refId": "A"
+						}
+					],
+					"thresholds": [],
+					"timeRegions": [],
+					"title": "MB of idle spans whose physical memory has been returned to the OS",
+					"tooltip": {
+						"shared": true,
+						"sort": 0,
+						"value_type": "individual"
+					},
+					"type": "graph",
+					"xaxis": {
+						"mode": "time",
+						"show": true,
+						"values": []
+					},
+					"yaxes": [
+						{
+							"format": "short",
+							"logBase": 1,
+							"show": true
+						},
+						{
+							"format": "short",
+							"logBase": 1,
+							"show": true
+						}
+					],
+					"yaxis": {
+						"align": false
+					}
+				},
+				{
+					"aliasColors": {},
+					"bars": false,
+					"dashLength": 10,
+					"dashes": false,
+					"fill": 1,
+					"fillGradient": 0,
+					"gridPos": {
+						"h": 8,
+						"w": 6,
+						"x": 18,
+						"y": 28
+					},
+					"hiddenSeries": false,
+					"id": 25,
+					"legend": {
+						"alignAsTable": true,
+						"avg": true,
+						"current": true,
+						"max": true,
+						"min": true,
+						"show": true,
+						"total": false,
+						"values": true
+					},
+					"lines": true,
+					"linewidth": 1,
+					"nullPointMode": "null",
+					"options": {
+						"alertThreshold": true
+					},
+					"percentage": false,
+					"pluginVersion": "8.4.2",
+					"pointradius": 2,
+					"points": false,
+					"renderer": "flot",
+					"seriesOverrides": [],
+					"spaceLength": 10,
+					"stack": false,
+					"steppedLine": false,
+					"targets": [
+						{
+							"expr": "sum(process_runtime_go_mem_heap_idle{service=\"playbooks\"}) by (pod) / 1048576",
+							"interval": "",
+							"legendFormat": "{{pod}}",
+							"refId": "A"
+						}
+					],
+					"thresholds": [],
+					"timeRegions": [],
+					"title": "MB in idle (unused) spans",
+					"tooltip": {
+						"shared": true,
+						"sort": 0,
+						"value_type": "individual"
+					},
+					"type": "graph",
+					"xaxis": {
+						"mode": "time",
+						"show": true,
+						"values": []
+					},
+					"yaxes": [
+						{
+							"format": "short",
+							"logBase": 1,
+							"show": true
+						},
+						{
+							"format": "short",
+							"logBase": 1,
+							"show": true
+						}
+					],
+					"yaxis": {
+						"align": false
+					}
+				},
+				{
+					"aliasColors": {},
+					"bars": false,
+					"dashLength": 10,
+					"dashes": false,
+					"fill": 1,
+					"fillGradient": 0,
+					"gridPos": {
+						"h": 8,
+						"w": 6,
+						"x": 0,
+						"y": 36
+					},
+					"hiddenSeries": false,
+					"id": 23,
+					"legend": {
+						"alignAsTable": true,
+						"avg": false,
+						"current": true,
+						"max": false,
+						"min": false,
+						"show": true,
+						"total": false,
+						"values": true
+					},
+					"lines": true,
+					"linewidth": 1,
+					"nullPointMode": "null",
+					"options": {
+						"alertThreshold": true
+					},
+					"percentage": false,
+					"pluginVersion": "8.4.2",
+					"pointradius": 2,
+					"points": false,
+					"renderer": "flot",
+					"seriesOverrides": [],
+					"spaceLength": 10,
+					"stack": false,
+					"steppedLine": false,
+					"targets": [
+						{
+							"expr": "sum(process_runtime_go_gc_count{service=\"playbooks\"}) by (pod)",
+							"interval": "",
+							"legendFormat": "{{pod}}",
+							"refId": "A"
+						}
+					],
+					"thresholds": [],
+					"timeRegions": [],
+					"title": "Number of completed garbage collection cycles",
+					"tooltip": {
+						"shared": true,
+						"sort": 0,
+						"value_type": "individual"
+					},
+					"type": "graph",
+					"xaxis": {
+						"mode": "time",
+						"show": true,
+						"values": []
+					},
+					"yaxes": [
+						{
+							"format": "short",
+							"logBase": 1,
+							"show": true
+						},
+						{
+							"format": "short",
+							"logBase": 1,
+							"show": true
+						}
+					],
+					"yaxis": {
+						"align": false
+					}
+				},
+				{
+					"aliasColors": {},
+					"bars": false,
+					"dashLength": 10,
+					"dashes": false,
+					"fill": 1,
+					"fillGradient": 0,
+					"gridPos": {
+						"h": 8,
+						"w": 6,
+						"x": 6,
+						"y": 36
+					},
+					"hiddenSeries": false,
+					"id": 24,
+					"legend": {
+						"alignAsTable": true,
+						"avg": false,
+						"current": true,
+						"max": false,
+						"min": false,
+						"show": true,
+						"total": false,
+						"values": true
+					},
+					"lines": true,
+					"linewidth": 1,
+					"nullPointMode": "null",
+					"options": {
+						"alertThreshold": true
+					},
+					"percentage": false,
+					"pluginVersion": "8.4.2",
+					"pointradius": 2,
+					"points": false,
+					"renderer": "flot",
+					"seriesOverrides": [],
+					"spaceLength": 10,
+					"stack": false,
+					"steppedLine": false,
+					"targets": [
+						{
+							"expr": "sum(process_runtime_go_gc_pause_total_ns{service=\"playbooks\"}) by (pod)",
+							"interval": "",
+							"legendFormat": "{{pod}}",
+							"refId": "A"
+						}
+					],
+					"thresholds": [],
+					"timeRegions": [],
+					"title": "Cumulative nanoseconds in GC stop-the-world pauses since the program started",
+					"tooltip": {
+						"shared": true,
+						"sort": 0,
+						"value_type": "individual"
+					},
+					"type": "graph",
+					"xaxis": {
+						"mode": "time",
+						"show": true,
+						"values": []
+					},
+					"yaxes": [
+						{
+							"format": "short",
+							"logBase": 1,
+							"show": true
+						},
+						{
+							"format": "short",
+							"logBase": 1,
+							"show": true
+						}
+					],
+					"yaxis": {
+						"align": false
+					}
+				},
+				{
+					"aliasColors": {},
+					"bars": false,
+					"dashLength": 10,
+					"dashes": false,
+					"description": "",
+					"fill": 1,
+					"fillGradient": 0,
+					"gridPos": {
+						"h": 8,
+						"w": 6,
+						"x": 12,
+						"y": 36
+					},
+					"hiddenSeries": false,
+					"id": 31,
+					"legend": {
+						"alignAsTable": true,
+						"avg": true,
+						"current": true,
+						"max": true,
+						"min": true,
+						"show": true,
+						"total": false,
+						"values": true
+					},
+					"lines": true,
+					"linewidth": 1,
+					"nullPointMode": "null",
+					"options": {
+						"alertThreshold": true
+					},
+					"percentage": false,
+					"pluginVersion": "8.4.2",
+					"pointradius": 2,
+					"points": false,
+					"renderer": "flot",
+					"seriesOverrides": [],
+					"spaceLength": 10,
+					"stack": false,
+					"steppedLine": false,
+					"targets": [
+						{
+							"expr": "sum(process_runtime_go_mem_lookups{service=\"playbooks\"}) by (pod)",
+							"interval": "",
+							"legendFormat": "{{pod}}",
+							"refId": "A"
+						}
+					],
+					"thresholds": [],
+					"timeRegions": [],
+					"title": "Number of pointer lookups performed by the runtime",
+					"tooltip": {
+						"shared": true,
+						"sort": 0,
+						"value_type": "individual"
+					},
+					"type": "graph",
+					"xaxis": {
+						"mode": "time",
+						"show": true,
+						"values": []
+					},
+					"yaxes": [
+						{
+							"format": "short",
+							"logBase": 1,
+							"show": true
+						},
+						{
+							"format": "short",
+							"logBase": 1,
+							"show": true
+						}
+					],
+					"yaxis": {
+						"align": false
+					}
+				},
+				{
+					"aliasColors": {},
+					"bars": false,
+					"dashLength": 10,
+					"dashes": false,
+					"fill": 1,
+					"fillGradient": 0,
+					"gridPos": {
+						"h": 8,
+						"w": 6,
+						"x": 18,
+						"y": 36
+					},
+					"hiddenSeries": false,
+					"id": 22,
+					"legend": {
+						"alignAsTable": true,
+						"avg": true,
+						"current": true,
+						"max": true,
+						"min": true,
+						"show": true,
+						"total": false,
+						"values": true
+					},
+					"lines": true,
+					"linewidth": 1,
+					"nullPointMode": "null",
+					"options": {
+						"alertThreshold": true
+					},
+					"percentage": false,
+					"pluginVersion": "8.4.2",
+					"pointradius": 2,
+					"points": false,
+					"renderer": "flot",
+					"seriesOverrides": [],
+					"spaceLength": 10,
+					"stack": false,
+					"steppedLine": false,
+					"targets": [
+						{
+							"expr": "process_runtime_go_cgo_calls{service=\"playbooks\"}",
+							"interval": "",
+							"legendFormat": "{{pod}}",
+							"refId": "A"
+						}
+					],
+					"thresholds": [],
+					"timeRegions": [],
+					"title": "Number of cgo calls made by the current process",
+					"tooltip": {
+						"shared": true,
+						"sort": 0,
+						"value_type": "individual"
+					},
+					"type": "graph",
+					"xaxis": {
+						"mode": "time",
+						"show": true,
+						"values": []
+					},
+					"yaxes": [
+						{
+							"format": "short",
+							"logBase": 1,
+							"show": true
+						},
+						{
+							"format": "short",
+							"logBase": 1,
+							"show": true
+						}
+					],
+					"yaxis": {
+						"align": false
+					}
+				}
+			],
+			"title": "golang metrics",
+			"type": "row"
+		}
+	],
+	"schemaVersion": 35,
+	"style": "dark",
+	"tags": [],
+	"templating": {
+		"list": [
+			{
+				"current": {
+					"selected": false,
+					"text": "default",
+					"value": "default"
+				},
+				"hide": 0,
+				"includeAll": false,
+				"multi": false,
+				"name": "datasource",
+				"options": [],
+				"query": "prometheus",
+				"refresh": 1,
+				"regex": "",
+				"skipUrlSync": false,
+				"type": "datasource"
+			}
+		]
+	},
+	"time": {
+		"from": "now-30m",
+		"to": "now"
+	},
+	"timepicker": {},
+	"timezone": "",
+	"title": "Cynet / Playbooks service",
+	"uid": "RYMaU1dnk",
+	"version": 3,
+	"weekStart": ""
+}

@@ -1,0 +1,17 @@
+{{ range $path, $_ :=  .Files.Glob  "grafana-dashboards/*/*.json" }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $path | base | trimSuffix ".json" | replace "_" "-" }}-grafana-dashboard
+  annotations:
+    k8s-sidecar-target-directory: /tmp/dashboards/{{ $path | trimPrefix "grafana-dashboards/" | dir }}
+  labels:
+    {{ index $.Values "kube-prometheus-stack" "grafana" "sidecar" "dashboards" "label" }}: "1"
+data:
+{{ if contains "prod-" (index $.Values "kube-prometheus-stack" "env") }}
+  {{ ($.Files.Glob (printf "%s" $path)).AsConfig | replace "__VALUES_ENV__" "(.*production.*|threatshield)" | nindent 2 }}
+{{ else }}
+  {{ ($.Files.Glob (printf "%s" $path)).AsConfig | replace "__VALUES_ENV__" (index $.Values "kube-prometheus-stack" "env") | nindent 2 }}
+{{ end }}
+---
+{{- end }}

@@ -1,0 +1,1924 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": "-- Grafana --",
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 1802,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "alert": {
+          "alertRuleTags": {},
+          "conditions": [
+            {
+              "evaluator": {
+                "params": [
+                  75
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "or"
+              },
+              "query": {
+                "params": [
+                  "B",
+                  "5m",
+                  "now"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            },
+            {
+              "evaluator": {
+                "params": [
+                  75
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "or"
+              },
+              "query": {
+                "params": [
+                  "C",
+                  "5m",
+                  "now"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            },
+            {
+              "evaluator": {
+                "params": [
+                  75
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "or"
+              },
+              "query": {
+                "params": [
+                  "D",
+                  "5m",
+                  "now"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            },
+            {
+              "evaluator": {
+                "params": [
+                  75
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "or"
+              },
+              "query": {
+                "params": [
+                  "E",
+                  "5m",
+                  "now"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            }
+          ],
+          "executionErrorState": "alerting",
+          "for": "5m",
+          "frequency": "1m",
+          "handler": 1,
+          "name": "RDS CPU Utilization alert - US",
+          "noDataState": "alerting",
+          "notifications": [
+            {
+              "uid": "h9noPBOVk"
+            }
+          ]
+        },
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "qStZ65-7k"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "id": 2,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "alias": "production-mariadb-us-east-1-0",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "ninjas-mariadb-us-east-1-0"
+            },
+            "expression": "",
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "CPUUtilization",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "A",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "alias": "production-mariadb-us-east-1-1",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-1"
+            },
+            "expression": "",
+            "hide": false,
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "CPUUtilization",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "B",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "alias": "production-mariadb-us-east-1-2",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-2"
+            },
+            "expression": "",
+            "hide": false,
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "CPUUtilization",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "C",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "alias": "production-mariadb-us-east-1-3",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-3"
+            },
+            "expression": "",
+            "hide": false,
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "CPUUtilization",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "D",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "alias": "production-mariadb-us-east-1-4",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-4"
+            },
+            "expression": "",
+            "hide": false,
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "CPUUtilization",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "E",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          }
+        ],
+        "thresholds": [
+          {
+            "colorMode": "critical",
+            "op": "gt",
+            "value": 75,
+            "visible": true
+          }
+        ],
+        "title": "CPU Utilization",
+        "type": "timeseries"
+      },
+      {
+        "alert": {
+          "alertRuleTags": {},
+          "conditions": [
+            {
+              "evaluator": {
+                "params": [
+                  3435973837
+                ],
+                "type": "lt"
+              },
+              "operator": {
+                "type": "and"
+              },
+              "query": {
+                "params": [
+                  "B",
+                  "5m",
+                  "now"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            },
+            {
+              "evaluator": {
+                "params": [
+                  3435973837
+                ],
+                "type": "lt"
+              },
+              "operator": {
+                "type": "or"
+              },
+              "query": {
+                "params": [
+                  "C",
+                  "5m",
+                  "now"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            },
+            {
+              "evaluator": {
+                "params": [
+                  1717986918
+                ],
+                "type": "lt"
+              },
+              "operator": {
+                "type": "or"
+              },
+              "query": {
+                "params": [
+                  "D",
+                  "5m",
+                  "now"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            },
+            {
+              "evaluator": {
+                "params": [
+                  1717986918
+                ],
+                "type": "lt"
+              },
+              "operator": {
+                "type": "or"
+              },
+              "query": {
+                "params": [
+                  "E",
+                  "5m",
+                  "now"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            }
+          ],
+          "executionErrorState": "alerting",
+          "for": "5m",
+          "frequency": "1m",
+          "handler": 1,
+          "name": "RDS Memory Utilization alert - US",
+          "noDataState": "alerting",
+          "notifications": [
+            {
+              "uid": "h9noPBOVk"
+            }
+          ]
+        },
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "qStZ65-7k"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "id": 4,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "alias": "production-mariadb-us-east-1-0",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-0"
+            },
+            "expression": "",
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "FreeableMemory",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "A",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "alias": "production-mariadb-us-east-1-1",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-1"
+            },
+            "expression": "",
+            "hide": false,
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "FreeableMemory",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "B",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "alias": "production-mariadb-us-east-1-2",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-2"
+            },
+            "expression": "",
+            "hide": false,
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "FreeableMemory",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "C",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "alias": "production-mariadb-us-east-1-3",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-3"
+            },
+            "expression": "",
+            "hide": false,
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "FreeableMemory",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "D",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "alias": "production-mariadb-us-east-1-4",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-4"
+            },
+            "expression": "",
+            "hide": false,
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "FreeableMemory",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "E",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          }
+        ],
+        "thresholds": [
+          {
+            "colorMode": "critical",
+            "op": "lt",
+            "value": 3435973837,
+            "visible": true
+          }
+        ],
+        "title": "Memory Utilization",
+        "type": "timeseries"
+      },
+      {
+        "alert": {
+          "alertRuleTags": {},
+          "conditions": [
+            {
+              "evaluator": {
+                "params": [
+                  0.02
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "and"
+              },
+              "query": {
+                "params": [
+                  "B",
+                  "5m",
+                  "now"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            },
+            {
+              "evaluator": {
+                "params": [
+                  0.02
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "or"
+              },
+              "query": {
+                "params": [
+                  "C",
+                  "5m",
+                  "now"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            },
+            {
+              "evaluator": {
+                "params": [
+                  0.02
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "or"
+              },
+              "query": {
+                "params": [
+                  "D",
+                  "5m",
+                  "now"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            },
+            {
+              "evaluator": {
+                "params": [
+                  0.02
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "or"
+              },
+              "query": {
+                "params": [
+                  "E",
+                  "5m",
+                  "now"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            }
+          ],
+          "executionErrorState": "alerting",
+          "for": "5m",
+          "frequency": "1m",
+          "handler": 1,
+          "name": "RDS Read Latency alert - US",
+          "noDataState": "alerting",
+          "notifications": [
+            {
+              "uid": "h9noPBOVk"
+            }
+          ]
+        },
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "qStZ65-7k"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 9
+        },
+        "id": 5,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "alias": "production-mariadb-us-east-1-0",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-0"
+            },
+            "expression": "",
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "ReadLatency",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "A",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "alias": "production-mariadb-us-east-1-1",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-1"
+            },
+            "expression": "",
+            "hide": false,
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "ReadLatency",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "B",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "alias": "production-mariadb-us-east-1-2",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-2"
+            },
+            "expression": "",
+            "hide": false,
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "ReadLatency",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "C",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "alias": "production-mariadb-us-east-1-3",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-3"
+            },
+            "expression": "",
+            "hide": false,
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "ReadLatency",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "D",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "alias": "production-mariadb-us-east-1-4",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-4"
+            },
+            "expression": "",
+            "hide": false,
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "ReadLatency",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "E",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          }
+        ],
+        "thresholds": [
+          {
+            "colorMode": "critical",
+            "op": "gt",
+            "value": 0.02,
+            "visible": true
+          }
+        ],
+        "title": "Read Latency",
+        "type": "timeseries"
+      },
+      {
+        "alert": {
+          "alertRuleTags": {},
+          "conditions": [
+            {
+              "evaluator": {
+                "params": [
+                  0.02
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "and"
+              },
+              "query": {
+                "params": [
+                  "B",
+                  "5m",
+                  "now"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            },
+            {
+              "evaluator": {
+                "params": [
+                  0.02
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "or"
+              },
+              "query": {
+                "params": [
+                  "C",
+                  "5m",
+                  "now"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            },
+            {
+              "evaluator": {
+                "params": [
+                  0.02
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "or"
+              },
+              "query": {
+                "params": [
+                  "D",
+                  "5m",
+                  "now"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            },
+            {
+              "evaluator": {
+                "params": [
+                  0.02
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "or"
+              },
+              "query": {
+                "params": [
+                  "E",
+                  "5m",
+                  "now"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            }
+          ],
+          "executionErrorState": "alerting",
+          "for": "5m",
+          "frequency": "1m",
+          "handler": 1,
+          "name": "RDS Write Latency alert - US",
+          "noDataState": "alerting",
+          "notifications": [
+            {
+              "uid": "h9noPBOVk"
+            }
+          ]
+        },
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "qStZ65-7k"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 9
+        },
+        "id": 6,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "alias": "production-mariadb-us-east-1-0",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-0"
+            },
+            "expression": "",
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "WriteLatency",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "A",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "alias": "production-mariadb-us-east-1-1",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-1"
+            },
+            "expression": "",
+            "hide": false,
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "WriteLatency",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "B",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "alias": "production-mariadb-us-east-1-2",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-2"
+            },
+            "expression": "",
+            "hide": false,
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "WriteLatency",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "C",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "alias": "production-mariadb-us-east-1-3",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-3"
+            },
+            "expression": "",
+            "hide": false,
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "WriteLatency",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "D",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "alias": "production-mariadb-us-east-1-4",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-4"
+            },
+            "expression": "",
+            "hide": false,
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "WriteLatency",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "E",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          }
+        ],
+        "thresholds": [
+          {
+            "colorMode": "critical",
+            "op": "gt",
+            "value": 0.02,
+            "visible": true
+          }
+        ],
+        "title": "Write Latency",
+        "type": "timeseries"
+      },
+      {
+        "alert": {
+          "alertRuleTags": {},
+          "conditions": [
+            {
+              "evaluator": {
+                "params": [
+                  4500
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "and"
+              },
+              "query": {
+                "params": [
+                  "B",
+                  "5m",
+                  "now"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            },
+            {
+              "evaluator": {
+                "params": [
+                  4500
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "or"
+              },
+              "query": {
+                "params": [
+                  "C",
+                  "5m",
+                  "now"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            },
+            {
+              "evaluator": {
+                "params": [
+                  4500
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "or"
+              },
+              "query": {
+                "params": [
+                  "D",
+                  "5m",
+                  "now"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            },
+            {
+              "evaluator": {
+                "params": [
+                  4500
+                ],
+                "type": "gt"
+              },
+              "operator": {
+                "type": "or"
+              },
+              "query": {
+                "params": [
+                  "E",
+                  "5m",
+                  "now"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            }
+          ],
+          "executionErrorState": "alerting",
+          "for": "5m",
+          "frequency": "1m",
+          "handler": 1,
+          "name": "RDS Number of Connections alert - US",
+          "noDataState": "alerting",
+          "notifications": [
+            {
+              "uid": "h9noPBOVk"
+            }
+          ]
+        },
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "qStZ65-7k"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 17
+        },
+        "id": 7,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "alias": "production-mariadb-us-east-1-0",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-0"
+            },
+            "expression": "",
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "DatabaseConnections",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "A",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "alias": "production-mariadb-us-east-1-1",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-1"
+            },
+            "expression": "",
+            "hide": false,
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "DatabaseConnections",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "B",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "alias": "production-mariadb-us-east-1-2",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-2"
+            },
+            "expression": "",
+            "hide": false,
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "DatabaseConnections",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "C",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "alias": "production-mariadb-us-east-1-3",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-3"
+            },
+            "expression": "",
+            "hide": false,
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "DatabaseConnections",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "D",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "alias": "production-mariadb-us-east-1-4",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-4"
+            },
+            "expression": "",
+            "hide": false,
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "DatabaseConnections",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "E",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          }
+        ],
+        "thresholds": [
+          {
+            "colorMode": "critical",
+            "op": "gt",
+            "value": 4500,
+            "visible": true
+          }
+        ],
+        "title": "Number of Connections",
+        "type": "timeseries"
+      },
+      {
+        "alert": {
+          "alertRuleTags": {},
+          "conditions": [
+            {
+              "evaluator": {
+                "params": [
+                  53687091200
+                ],
+                "type": "lt"
+              },
+              "operator": {
+                "type": "and"
+              },
+              "query": {
+                "params": [
+                  "B",
+                  "5m",
+                  "now"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            },
+            {
+              "evaluator": {
+                "params": [
+                  53687091200
+                ],
+                "type": "lt"
+              },
+              "operator": {
+                "type": "or"
+              },
+              "query": {
+                "params": [
+                  "C",
+                  "5m",
+                  "now"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            },
+            {
+              "evaluator": {
+                "params": [
+                  53687091200
+                ],
+                "type": "lt"
+              },
+              "operator": {
+                "type": "or"
+              },
+              "query": {
+                "params": [
+                  "D",
+                  "5m",
+                  "now"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            },
+            {
+              "evaluator": {
+                "params": [
+                  53687091200
+                ],
+                "type": "lt"
+              },
+              "operator": {
+                "type": "or"
+              },
+              "query": {
+                "params": [
+                  "E",
+                  "5m",
+                  "now"
+                ]
+              },
+              "reducer": {
+                "params": [],
+                "type": "avg"
+              },
+              "type": "query"
+            }
+          ],
+          "executionErrorState": "alerting",
+          "for": "5m",
+          "frequency": "1m",
+          "handler": 1,
+          "name": "RDS Disk Usage alert - US",
+          "noDataState": "alerting",
+          "notifications": [
+            {
+              "uid": "h9noPBOVk"
+            }
+          ]
+        },
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "qStZ65-7k"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 17
+        },
+        "id": 8,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "alias": "production-mariadb-us-east-1-0",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-0"
+            },
+            "expression": "",
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "FreeStorageSpace",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "A",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "alias": "production-mariadb-us-east-1-1",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-1"
+            },
+            "expression": "",
+            "hide": false,
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "FreeStorageSpace",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "B",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "alias": "production-mariadb-us-east-1-2",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-2"
+            },
+            "expression": "",
+            "hide": false,
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "FreeStorageSpace",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "C",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "alias": "production-mariadb-us-east-1-3",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-3"
+            },
+            "expression": "",
+            "hide": false,
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "FreeStorageSpace",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "D",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "alias": "production-mariadb-us-east-1-4",
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "qStZ65-7k"
+            },
+            "dimensions": {
+              "DBInstanceIdentifier": "production-mariadb-us-east-1-4"
+            },
+            "expression": "",
+            "hide": false,
+            "id": "",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "FreeStorageSpace",
+            "metricQueryType": 0,
+            "namespace": "AWS/RDS",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "E",
+            "region": "us-east-1",
+            "sqlExpression": "",
+            "statistic": "Average"
+          }
+        ],
+        "thresholds": [
+          {
+            "colorMode": "critical",
+            "op": "lt",
+            "value": 53687091200,
+            "visible": true
+          }
+        ],
+        "title": "Disk Usage",
+        "type": "timeseries"
+      }
+    ],
+    "refresh": "",
+    "schemaVersion": 35,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "RDS resource monitor - US",
+    "uid": "UI2znt5Vk",
+    "version": 2,
+    "weekStart": ""
+  }

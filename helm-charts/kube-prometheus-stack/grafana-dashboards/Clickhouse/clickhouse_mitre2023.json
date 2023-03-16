@@ -1,0 +1,714 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 2496,
+  "iteration": 1676215422288,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 11,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.4.2",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "sum(pulsar_subscription_back_log{kubernetes_namespace=\"mitre2023\"}) by (subscription) > 20",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{subscription}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "sum(pulsar_subscription_back_log{subscription=\"file-events-sink\"})",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "file-svc-sink",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": true,
+          "expr": "sum(pulsar_subscription_back_log{subscription=\"file-events-mitre-policy\"})",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "mitre-policy",
+          "refId": "C"
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Pulasr Lag",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "vertamedia-clickhouse-datasource",
+        "uid": "P77E667F016E9F9F6"
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 13,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 2,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.4.2",
+      "pointradius": 2,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "database": "mtr",
+          "datasource": {
+            "type": "vertamedia-clickhouse-datasource",
+            "uid": "P77E667F016E9F9F6"
+          },
+          "dateColDataType": "",
+          "dateLoading": false,
+          "dateTimeColDataType": "event_create_time",
+          "dateTimeType": "DATETIME",
+          "datetimeLoading": false,
+          "extrapolate": true,
+          "format": "time_series",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "hide": false,
+          "interval": "10m",
+          "intervalFactor": 1,
+          "query": "SELECT\n    $timeSeries as t,\n    count() as file\nFROM mtr.file_events\nWHERE $timeFilter\nGROUP BY t\nORDER BY t",
+          "rawQuery": "SELECT\n    (intDiv(toUInt32(event_create_time), 600) * 600) * 1000 as t,\n    count() as file\nFROM mtr.file_events\nWHERE event_create_time >= toDateTime(1675610218) AND event_create_time <= toDateTime(1676215018)\nGROUP BY t\nORDER BY t",
+          "refId": "A",
+          "round": "0s",
+          "skip_comments": true,
+          "table": "file_events",
+          "tableLoading": false
+        },
+        {
+          "database": "mtr",
+          "datasource": {
+            "type": "vertamedia-clickhouse-datasource",
+            "uid": "P77E667F016E9F9F6"
+          },
+          "dateColDataType": "dbDay",
+          "dateLoading": false,
+          "dateTimeColDataType": "dbTime",
+          "dateTimeType": "DATETIME",
+          "datetimeLoading": false,
+          "extrapolate": true,
+          "format": "time_series",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "hide": false,
+          "interval": "10m",
+          "intervalFactor": 1,
+          "query": "SELECT\n    $timeSeries as t,\n    count() as windows\nFROM mtr.windows_events\nWHERE $timeFilter\nGROUP BY t\nORDER BY t",
+          "rawQuery": "SELECT\n    (intDiv(toUInt32(dbTime), 600) * 600) * 1000 as t,\n    count() as windows\nFROM mtr.windows_events\nWHERE dbDay >= toDate(1675610218) AND dbDay <= toDate(1676215018) AND dbTime >= toDateTime(1675610218) AND dbTime <= toDateTime(1676215018)\nGROUP BY t\nORDER BY t",
+          "refId": "B",
+          "round": "0s",
+          "skip_comments": true,
+          "table": "windows_events",
+          "tableLoading": false
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Traffic",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "aliasColors": {},
+      "breakPoint": "50%",
+      "combine": {
+        "label": "Others",
+        "threshold": 0
+      },
+      "datasource": {
+        "type": "vertamedia-clickhouse-datasource",
+        "uid": "P77E667F016E9F9F6"
+      },
+      "description": "",
+      "fontSize": "80%",
+      "format": "short",
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "id": 5,
+      "legend": {
+        "show": true,
+        "sort": "total",
+        "sortDesc": true,
+        "values": true
+      },
+      "legendType": "Under graph",
+      "links": [],
+      "nullPointMode": "connected",
+      "pieType": "pie",
+      "pluginVersion": "7.3.4",
+      "strokeWidth": 1,
+      "targets": [
+        {
+          "database": "mtr",
+          "datasource": {
+            "type": "vertamedia-clickhouse-datasource",
+            "uid": "P77E667F016E9F9F6"
+          },
+          "dateColDataType": "",
+          "dateLoading": false,
+          "dateTimeColDataType": "event_create_time",
+          "dateTimeType": "DATETIME",
+          "datetimeLoading": false,
+          "extrapolate": true,
+          "format": "time_series",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "interval": "5m",
+          "intervalFactor": 1,
+          "query": "SELECT\n    $timeSeries as t,\n    count(),\n    action\nFROM mtr.file_events\n\nWHERE $timeFilter\n\nGROUP BY\n    t,\n    action\nORDER BY t\n",
+          "rawQuery": "SELECT\n    (intDiv(toUInt32(event_create_time), 300) * 300) * 1000 as t,\n    count(),\n    action\nFROM mtr.file_events\n\nWHERE event_create_time >= toDateTime(1676163992) AND event_create_time <= toDateTime(1676207192)\n\nGROUP BY\n    t,\n    action\nORDER BY t",
+          "refId": "A",
+          "round": "0s",
+          "skip_comments": true,
+          "table": "file_events",
+          "tableLoading": false
+        }
+      ],
+      "title": "Actions",
+      "type": "grafana-piechart-panel",
+      "valueName": "total"
+    },
+    {
+      "aliasColors": {},
+      "bars": true,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": {
+        "type": "vertamedia-clickhouse-datasource",
+        "uid": "P77E667F016E9F9F6"
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 13,
+        "w": 12,
+        "x": 12,
+        "y": 13
+      },
+      "hiddenSeries": false,
+      "id": 13,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.4.2",
+      "pointradius": 2,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "database": "mtr",
+          "datasource": {
+            "type": "vertamedia-clickhouse-datasource",
+            "uid": "P77E667F016E9F9F6"
+          },
+          "dateColDataType": "",
+          "dateLoading": false,
+          "dateTimeColDataType": "ts",
+          "dateTimeType": "DATETIME",
+          "datetimeLoading": false,
+          "extrapolate": true,
+          "format": "time_series",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "interval": "15m",
+          "intervalFactor": 1,
+          "query": "SELECT\n    $timeSeries as t,\n    count(rule_id),\n    rule_id\nFROM mtr.alerts\nWHERE $timeFilter\nGROUP BY t,rule_id\nORDER BY t\n",
+          "rawQuery": "SELECT\n    (intDiv(toUInt32(ts), 900) * 900) * 1000 as t,\n    count(rule_id),\n    rule_id\nFROM mtr.alerts\nWHERE ts >= toDateTime(1676193623) AND ts <= toDateTime(1676215223)\nGROUP BY t,rule_id\nORDER BY t",
+          "refId": "A",
+          "round": "0s",
+          "skip_comments": true,
+          "table": "file_events",
+          "tableLoading": false
+        }
+      ],
+      "thresholds": [],
+      "timeRegions": [],
+      "title": "Alerts",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "mode": "time",
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:1444",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:1445",
+          "format": "short",
+          "logBase": 1,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false
+      }
+    },
+    {
+      "datasource": {
+        "type": "vertamedia-clickhouse-datasource",
+        "uid": "P77E667F016E9F9F6"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto",
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 17
+      },
+      "id": 9,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "frameIndex": 1,
+        "showHeader": true
+      },
+      "pluginVersion": "8.4.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "vertamedia-clickhouse-datasource",
+            "uid": "P77E667F016E9F9F6"
+          },
+          "dateTimeType": "DATETIME",
+          "extrapolate": true,
+          "format": "table",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "query": "    select table,\n           sum(rows)                                            as rows,\n           max(modification_time)                               as latest_modification,\n           formatReadableSize(sum(bytes))                       as disk_size,\n           formatReadableSize(sum(primary_key_bytes_in_memory)) as primary_keys_size,\n           any(engine)                                          as engine,\n           sum(bytes)                                           as bytes_size\n    from system.parts\n    where active and database = currentDatabase()\n    group by database, table\n    ",
+          "rawQuery": "select table,\n           sum(rows)                                            as rows,\n           max(modification_time)                               as latest_modification,\n           formatReadableSize(sum(bytes))                       as disk_size,\n           formatReadableSize(sum(primary_key_bytes_in_memory)) as primary_keys_size,\n           any(engine)                                          as engine,\n           sum(bytes)                                           as bytes_size\n    from system.parts\n    where active and database = currentDatabase()\n    group by database, table",
+          "refId": "A",
+          "round": "0s",
+          "skip_comments": true
+        },
+        {
+          "datasource": {
+            "type": "vertamedia-clickhouse-datasource",
+            "uid": "P77E667F016E9F9F6"
+          },
+          "dateTimeType": "DATETIME",
+          "extrapolate": true,
+          "format": "table",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "query": "    select table  as mitre_table,\n           sum(rows)                                            as rows,\n           max(modification_time)                               as latest_modification,\n           formatReadableSize(sum(bytes))                       as disk_size,\n           formatReadableSize(sum(primary_key_bytes_in_memory)) as primary_keys_size,\n           any(engine)                                          as engine,\n           sum(bytes)                                           as bytes_size\n    from system.parts\n    where active and database = 'mtr'\n    group by database, table\n    ",
+          "rawQuery": "select table  as mitre_table,\n           sum(rows)                                            as rows,\n           max(modification_time)                               as latest_modification,\n           formatReadableSize(sum(bytes))                       as disk_size,\n           formatReadableSize(sum(primary_key_bytes_in_memory)) as primary_keys_size,\n           any(engine)                                          as engine,\n           sum(bytes)                                           as bytes_size\n    from system.parts\n    where active and database = 'mtr'\n    group by database, table",
+          "refId": "B",
+          "round": "0s",
+          "skip_comments": true
+        }
+      ],
+      "title": "Table stats",
+      "transparent": true,
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "vertamedia-clickhouse-datasource",
+        "uid": "P77E667F016E9F9F6"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto",
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 0,
+        "y": 23
+      },
+      "id": 12,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "frameIndex": 1,
+        "showHeader": true
+      },
+      "pluginVersion": "8.4.2",
+      "targets": [
+        {
+          "database": "system",
+          "datasource": {
+            "type": "vertamedia-clickhouse-datasource",
+            "uid": "P77E667F016E9F9F6"
+          },
+          "dateColDataType": "",
+          "dateLoading": false,
+          "dateTimeType": "DATETIME",
+          "datetimeLoading": false,
+          "extrapolate": true,
+          "format": "table",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "hide": false,
+          "intervalFactor": 1,
+          "query": "SELECT metric,formatReadableSize(value)as size\nFROM system.metrics\nWHERE metric in( 'MemoryTrackingForMerges','MemoryTracking')\nORDER BY value DESC\nLIMIT 10\n    ",
+          "rawQuery": "SELECT metric,formatReadableSize(value)as size\nFROM system.metrics\nWHERE metric in( 'MemoryTrackingForMerges','MemoryTracking')\nORDER BY value DESC\nLIMIT 10",
+          "refId": "A",
+          "round": "0s",
+          "skip_comments": true,
+          "table": "metrics",
+          "tableLoading": false
+        }
+      ],
+      "title": "Memory stats",
+      "transparent": true,
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "vertamedia-clickhouse-datasource",
+        "uid": "P77E667F016E9F9F6"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 12,
+        "x": 12,
+        "y": 26
+      },
+      "id": 7,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "8.4.2",
+      "targets": [
+        {
+          "database": "mtr",
+          "datasource": {
+            "type": "vertamedia-clickhouse-datasource",
+            "uid": "P77E667F016E9F9F6"
+          },
+          "dateColDataType": "",
+          "dateLoading": false,
+          "dateTimeColDataType": "event_create_time",
+          "dateTimeType": "DATETIME",
+          "datetimeLoading": false,
+          "extrapolate": true,
+          "format": "time_series",
+          "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+          "interval": "10m",
+          "intervalFactor": 1,
+          "query": "SELECT\n    count(file_path) AS nt,\n    file_path\nFROM mtr.file_events_dist\nWHERE $timeFilter\nGROUP BY file_path\nHAVING nt > 100\nORDER BY nt DESC\nLIMIT 10\n",
+          "rawQuery": "SELECT\n    count(file_path) AS nt,\n    file_path\nFROM mtr.file_events_dist\nWHERE event_create_time >= toDateTime(1676196170) AND event_create_time <= toDateTime(1676206970)\nGROUP BY file_path\nHAVING nt > 100\nORDER BY nt DESC\nLIMIT 10",
+          "refId": "A",
+          "round": "0s",
+          "skip_comments": true,
+          "table": "file_events",
+          "tableLoading": false
+        }
+      ],
+      "title": "Popular paths",
+      "type": "bargauge"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 35,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "2290971",
+          "value": "2290971"
+        },
+        "datasource": {
+          "type": "vertamedia-clickhouse-datasource",
+          "uid": "P77E667F016E9F9F6"
+        },
+        "definition": "SELECT distinct toString(client_id) FROM mtr.file_events_dist",
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "tenant",
+        "options": [],
+        "query": "SELECT distinct toString(client_id) FROM mtr.file_events_dist",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Clickhouse Mitre2023",
+  "uid": "j6y_u73Vz",
+  "version": 1,
+  "weekStart": ""
+}

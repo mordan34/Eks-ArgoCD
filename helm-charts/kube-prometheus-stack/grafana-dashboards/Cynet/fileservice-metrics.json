@@ -1,0 +1,1135 @@
+﻿{
+	"annotations": {
+		"list": [
+			{
+				"builtIn": 1,
+				"datasource": "-- Grafana --",
+				"enable": true,
+				"hide": true,
+				"iconColor": "rgba(0, 211, 255, 1)",
+				"name": "Annotations & Alerts",
+				"type": "dashboard"
+			}
+		]
+	},
+	"editable": true,
+	"gnetId": 10427,
+	"graphTooltip": 0,
+	"id": 713,
+	"iteration": 1607851799305,
+	"links": [],
+	"panels": [
+		{
+			"aliasColors": {},
+			"bars": false,
+			"dashLength": 10,
+			"dashes": false,
+			"datasource": null,
+			"fieldConfig": {
+				"defaults": {
+					"custom": {}
+				},
+				"overrides": []
+			},
+			"fill": 1,
+			"fillGradient": 0,
+			"gridPos": {
+				"h": 8,
+				"w": 9,
+				"x": 0,
+				"y": 0
+			},
+			"hiddenSeries": false,
+			"id": 22,
+			"legend": {
+				"avg": false,
+				"current": false,
+				"max": false,
+				"min": false,
+				"show": true,
+				"total": false,
+				"values": false
+			},
+			"lines": true,
+			"linewidth": 1,
+			"nullPointMode": "null",
+			"options": {
+				"alertThreshold": true
+			},
+			"percentage": false,
+			"pluginVersion": "7.3.4",
+			"pointradius": 2,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [],
+			"spaceLength": 10,
+			"stack": false,
+			"steppedLine": false,
+			"targets": [
+				{
+					"expr": "sum(http_requests_in_progress{job=\"fileservice\"}) by (controller)",
+					"interval": "",
+					"legendFormat": "{{controller}}",
+					"refId": "A"
+				}
+			],
+			"thresholds": [],
+			"timeFrom": null,
+			"timeRegions": [],
+			"timeShift": null,
+			"title": "Requests in progress",
+			"tooltip": {
+				"shared": true,
+				"sort": 0,
+				"value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+				"buckets": null,
+				"mode": "time",
+				"name": null,
+				"show": true,
+				"values": []
+			},
+			"yaxes": [
+				{
+					"format": "short",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				},
+				{
+					"format": "short",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				}
+			],
+			"yaxis": {
+				"align": false,
+				"alignLevel": null
+			}
+		},
+		{
+			"aliasColors": {},
+			"bars": false,
+			"dashLength": 10,
+			"dashes": false,
+			"datasource": "${datasource}",
+			"decimals": 0,
+			"description": "",
+			"fieldConfig": {
+				"defaults": {
+					"custom": {},
+					"links": []
+				},
+				"overrides": []
+			},
+			"fill": 1,
+			"fillGradient": 0,
+			"gridPos": {
+				"h": 8,
+				"w": 8,
+				"x": 9,
+				"y": 0
+			},
+			"hiddenSeries": false,
+			"id": 14,
+			"interval": "",
+			"legend": {
+				"alignAsTable": true,
+				"avg": true,
+				"current": true,
+				"max": true,
+				"min": false,
+				"show": true,
+				"total": false,
+				"values": true
+			},
+			"lines": true,
+			"linewidth": 1,
+			"links": [],
+			"nullPointMode": "connected",
+			"options": {
+				"alertThreshold": true
+			},
+			"percentage": false,
+			"pluginVersion": "7.3.4",
+			"pointradius": 2,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [],
+			"spaceLength": 10,
+			"stack": false,
+			"steppedLine": false,
+			"targets": [
+				{
+					"expr": "process_open_handles{job=\"fileservice\"}",
+					"format": "time_series",
+					"interval": "",
+					"intervalFactor": 1,
+					"legendFormat": "{{pod}}",
+					"refId": "A"
+				}
+			],
+			"thresholds": [],
+			"timeFrom": null,
+			"timeRegions": [],
+			"timeShift": null,
+			"title": "Number of open handles",
+			"tooltip": {
+				"shared": true,
+				"sort": 0,
+				"value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+				"buckets": null,
+				"mode": "time",
+				"name": null,
+				"show": true,
+				"values": []
+			},
+			"yaxes": [
+				{
+					"decimals": 0,
+					"format": "short",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				},
+				{
+					"format": "short",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				}
+			],
+			"yaxis": {
+				"align": false,
+				"alignLevel": null
+			}
+		},
+		{
+			"aliasColors": {},
+			"bars": false,
+			"dashLength": 10,
+			"dashes": false,
+			"datasource": "${datasource}",
+			"fieldConfig": {
+				"defaults": {
+					"custom": {},
+					"links": []
+				},
+				"overrides": []
+			},
+			"fill": 1,
+			"fillGradient": 0,
+			"gridPos": {
+				"h": 8,
+				"w": 7,
+				"x": 17,
+				"y": 0
+			},
+			"hiddenSeries": false,
+			"id": 18,
+			"interval": "",
+			"legend": {
+				"alignAsTable": false,
+				"avg": false,
+				"current": true,
+				"max": true,
+				"min": false,
+				"show": true,
+				"total": false,
+				"values": true
+			},
+			"lines": true,
+			"linewidth": 1,
+			"links": [],
+			"nullPointMode": "connected",
+			"options": {
+				"alertThreshold": true
+			},
+			"percentage": false,
+			"pluginVersion": "7.3.4",
+			"pointradius": 2,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [],
+			"spaceLength": 10,
+			"stack": false,
+			"steppedLine": false,
+			"targets": [
+				{
+					"expr": "increase(dotnet_collection_count_total{job=\"fileservice\"}[$interval])",
+					"format": "time_series",
+					"interval": "",
+					"intervalFactor": 1,
+					"legendFormat": "{{pod}}-Gen-{{generation}}",
+					"refId": "A"
+				}
+			],
+			"thresholds": [],
+			"timeFrom": null,
+			"timeRegions": [],
+			"timeShift": null,
+			"title": "GC collection count",
+			"tooltip": {
+				"shared": true,
+				"sort": 0,
+				"value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+				"buckets": null,
+				"mode": "time",
+				"name": null,
+				"show": true,
+				"values": []
+			},
+			"yaxes": [
+				{
+					"decimals": 0,
+					"format": "short",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				},
+				{
+					"format": "short",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				}
+			],
+			"yaxis": {
+				"align": false,
+				"alignLevel": null
+			}
+		},
+		{
+			"aliasColors": {},
+			"bars": false,
+			"dashLength": 10,
+			"dashes": false,
+			"datasource": "${datasource}",
+			"description": "",
+			"fieldConfig": {
+				"defaults": {
+					"custom": {},
+					"links": []
+				},
+				"overrides": []
+			},
+			"fill": 1,
+			"fillGradient": 4,
+			"gridPos": {
+				"h": 8,
+				"w": 8,
+				"x": 0,
+				"y": 8
+			},
+			"hiddenSeries": false,
+			"id": 20,
+			"legend": {
+				"avg": false,
+				"current": false,
+				"max": false,
+				"min": false,
+				"show": true,
+				"total": false,
+				"values": false
+			},
+			"lines": true,
+			"linewidth": 1,
+			"links": [],
+			"nullPointMode": "connected",
+			"options": {
+				"alertThreshold": true
+			},
+			"percentage": false,
+			"pluginVersion": "7.3.4",
+			"pointradius": 2,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [],
+			"spaceLength": 10,
+			"stack": false,
+			"steppedLine": false,
+			"targets": [
+				{
+					"expr": "sum(increase(http_request_duration_seconds_bucket{job=\"fileservice\"}[$interval])) by (controller, le)",
+					"format": "heatmap",
+					"hide": false,
+					"interval": "",
+					"intervalFactor": 1,
+					"legendFormat": "{{controller}}-{{le}}",
+					"refId": "A"
+				},
+				{
+					"expr": "http_request_duration_seconds_bucket{job=\"fileservice\"}",
+					"format": "heatmap",
+					"hide": true,
+					"interval": "",
+					"intervalFactor": 1,
+					"legendFormat": "{{controller}}-{{le}}",
+					"refId": "B"
+				}
+			],
+			"thresholds": [],
+			"timeFrom": null,
+			"timeRegions": [],
+			"timeShift": null,
+			"title": "The duration of HTTP requests",
+			"tooltip": {
+				"shared": true,
+				"sort": 2,
+				"value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+				"buckets": null,
+				"mode": "time",
+				"name": null,
+				"show": true,
+				"values": []
+			},
+			"yaxes": [
+				{
+					"format": "short",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				},
+				{
+					"format": "short",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				}
+			],
+			"yaxis": {
+				"align": false,
+				"alignLevel": null
+			}
+		},
+		{
+			"aliasColors": {},
+			"bars": false,
+			"dashLength": 10,
+			"dashes": false,
+			"datasource": "${datasource}",
+			"decimals": 0,
+			"description": "",
+			"fieldConfig": {
+				"defaults": {
+					"custom": {},
+					"links": []
+				},
+				"overrides": []
+			},
+			"fill": 1,
+			"fillGradient": 0,
+			"gridPos": {
+				"h": 8,
+				"w": 8,
+				"x": 8,
+				"y": 8
+			},
+			"hiddenSeries": false,
+			"id": 12,
+			"legend": {
+				"alignAsTable": true,
+				"avg": true,
+				"current": true,
+				"max": true,
+				"min": false,
+				"show": true,
+				"total": false,
+				"values": true
+			},
+			"lines": true,
+			"linewidth": 1,
+			"links": [],
+			"nullPointMode": "connected",
+			"options": {
+				"alertThreshold": true
+			},
+			"percentage": false,
+			"pluginVersion": "7.3.4",
+			"pointradius": 2,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [],
+			"spaceLength": 10,
+			"stack": false,
+			"steppedLine": false,
+			"targets": [
+				{
+					"expr": "process_num_threads{job=\"fileservice\"}",
+					"format": "time_series",
+					"interval": "",
+					"intervalFactor": 1,
+					"legendFormat": "{{pod}}",
+					"refId": "A"
+				}
+			],
+			"thresholds": [],
+			"timeFrom": null,
+			"timeRegions": [],
+			"timeShift": null,
+			"title": "Total number of threads",
+			"tooltip": {
+				"shared": true,
+				"sort": 0,
+				"value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+				"buckets": null,
+				"mode": "time",
+				"name": null,
+				"show": true,
+				"values": []
+			},
+			"yaxes": [
+				{
+					"decimals": 0,
+					"format": "short",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				},
+				{
+					"format": "short",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				}
+			],
+			"yaxis": {
+				"align": false,
+				"alignLevel": null
+			}
+		},
+		{
+			"aliasColors": {},
+			"bars": false,
+			"dashLength": 10,
+			"dashes": false,
+			"datasource": "${datasource}",
+			"description": "",
+			"fieldConfig": {
+				"defaults": {
+					"custom": {}
+				},
+				"overrides": []
+			},
+			"fill": 1,
+			"fillGradient": 0,
+			"gridPos": {
+				"h": 8,
+				"w": 8,
+				"x": 16,
+				"y": 8
+			},
+			"hiddenSeries": false,
+			"id": 24,
+			"legend": {
+				"avg": false,
+				"current": false,
+				"max": false,
+				"min": false,
+				"show": true,
+				"total": false,
+				"values": false
+			},
+			"lines": true,
+			"linewidth": 1,
+			"nullPointMode": "null",
+			"options": {
+				"alertThreshold": true
+			},
+			"percentage": false,
+			"pluginVersion": "7.3.4",
+			"pointradius": 2,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [],
+			"spaceLength": 10,
+			"stack": false,
+			"steppedLine": false,
+			"targets": [
+				{
+					"expr": "node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate{namespace=\"cynet\", container=\"fileservice\"}",
+					"hide": true,
+					"interval": "",
+					"legendFormat": "",
+					"refId": "B"
+				},
+				{
+					"expr": "rate(container_cpu_usage_seconds_total{namespace=\"cynet\", container=\"fileservice\"}[5m])",
+					"interval": "",
+					"legendFormat": "{{pod}}",
+					"refId": "A"
+				}
+			],
+			"thresholds": [],
+			"timeFrom": null,
+			"timeRegions": [],
+			"timeShift": null,
+			"title": "CPU",
+			"tooltip": {
+				"shared": true,
+				"sort": 0,
+				"value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+				"buckets": null,
+				"mode": "time",
+				"name": null,
+				"show": true,
+				"values": []
+			},
+			"yaxes": [
+				{
+					"format": "short",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				},
+				{
+					"format": "short",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				}
+			],
+			"yaxis": {
+				"align": false,
+				"alignLevel": null
+			}
+		},
+		{
+			"datasource": null,
+			"fieldConfig": {
+				"defaults": {
+					"custom": {
+						"align": null,
+						"filterable": false
+					},
+					"mappings": [],
+					"thresholds": {
+						"mode": "absolute",
+						"steps": [
+							{
+								"color": "green",
+								"value": null
+							},
+							{
+								"color": "red",
+								"value": 80
+							}
+						]
+					},
+					"unit": "none"
+				},
+				"overrides": []
+			},
+			"gridPos": {
+				"h": 8,
+				"w": 12,
+				"x": 0,
+				"y": 16
+			},
+			"id": 28,
+			"options": {
+				"showHeader": true,
+				"sortBy": [
+					{
+						"desc": true,
+						"displayName": "events_count"
+					}
+				]
+			},
+			"pluginVersion": "7.3.4",
+			"targets": [
+				{
+					"expr": "rate(fs_file_events[$interval])",
+					"format": "table",
+					"interval": "",
+					"legendFormat": "",
+					"refId": "A"
+				}
+			],
+			"timeFrom": null,
+			"timeShift": null,
+			"title": "File monitoring",
+			"type": "table"
+		},
+		{
+			"aliasColors": {},
+			"bars": false,
+			"cacheTimeout": null,
+			"dashLength": 10,
+			"dashes": false,
+			"datasource": "${datasource}",
+			"decimals": 0,
+			"fieldConfig": {
+				"defaults": {
+					"custom": {},
+					"links": []
+				},
+				"overrides": []
+			},
+			"fill": 1,
+			"fillGradient": 0,
+			"gridPos": {
+				"h": 7,
+				"w": 8,
+				"x": 12,
+				"y": 16
+			},
+			"hiddenSeries": false,
+			"id": 8,
+			"legend": {
+				"alignAsTable": true,
+				"avg": true,
+				"current": true,
+				"max": true,
+				"min": false,
+				"show": true,
+				"total": false,
+				"values": true
+			},
+			"lines": true,
+			"linewidth": 1,
+			"links": [],
+			"nullPointMode": "connected",
+			"options": {
+				"alertThreshold": true
+			},
+			"percentage": false,
+			"pluginVersion": "7.3.4",
+			"pointradius": 2,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [],
+			"spaceLength": 10,
+			"stack": false,
+			"steppedLine": false,
+			"targets": [
+				{
+					"expr": "dotnet_total_memory_bytes{job=\"fileservice\"}/1024/1024",
+					"format": "time_series",
+					"interval": "",
+					"intervalFactor": 1,
+					"legendFormat": "{{pod}}",
+					"refId": "A"
+				}
+			],
+			"thresholds": [],
+			"timeFrom": null,
+			"timeRegions": [],
+			"timeShift": null,
+			"title": "Total known allocated memory",
+			"tooltip": {
+				"shared": true,
+				"sort": 0,
+				"value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+				"buckets": null,
+				"mode": "time",
+				"name": null,
+				"show": true,
+				"values": []
+			},
+			"yaxes": [
+				{
+					"decimals": 0,
+					"format": "short",
+					"label": "",
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				},
+				{
+					"format": "short",
+					"label": "",
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				}
+			],
+			"yaxis": {
+				"align": false,
+				"alignLevel": null
+			}
+		},
+		{
+			"aliasColors": {},
+			"bars": false,
+			"cacheTimeout": null,
+			"dashLength": 10,
+			"dashes": false,
+			"datasource": "${datasource}",
+			"decimals": 0,
+			"fieldConfig": {
+				"defaults": {
+					"custom": {},
+					"links": []
+				},
+				"overrides": []
+			},
+			"fill": 1,
+			"fillGradient": 0,
+			"gridPos": {
+				"h": 7,
+				"w": 8,
+				"x": 12,
+				"y": 23
+			},
+			"hiddenSeries": false,
+			"id": 10,
+			"legend": {
+				"alignAsTable": true,
+				"avg": true,
+				"current": true,
+				"max": true,
+				"min": false,
+				"show": true,
+				"total": false,
+				"values": true
+			},
+			"lines": true,
+			"linewidth": 1,
+			"links": [],
+			"nullPointMode": "connected",
+			"options": {
+				"alertThreshold": true
+			},
+			"percentage": false,
+			"pluginVersion": "7.3.4",
+			"pointradius": 2,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [],
+			"spaceLength": 10,
+			"stack": false,
+			"steppedLine": false,
+			"targets": [
+				{
+					"expr": "process_working_set_bytes{job=\"fileservice\"} /1024/1024",
+					"format": "time_series",
+					"interval": "",
+					"intervalFactor": 1,
+					"legendFormat": "{{pod}}",
+					"refId": "A"
+				}
+			],
+			"thresholds": [],
+			"timeFrom": null,
+			"timeRegions": [],
+			"timeShift": null,
+			"title": "Process working set",
+			"tooltip": {
+				"shared": true,
+				"sort": 0,
+				"value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+				"buckets": null,
+				"mode": "time",
+				"name": null,
+				"show": true,
+				"values": []
+			},
+			"yaxes": [
+				{
+					"decimals": 0,
+					"format": "short",
+					"label": "",
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				},
+				{
+					"decimals": null,
+					"format": "short",
+					"label": "",
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				}
+			],
+			"yaxis": {
+				"align": false,
+				"alignLevel": null
+			}
+		},
+		{
+			"datasource": "${datasource}",
+			"fieldConfig": {
+				"defaults": {
+					"custom": {
+						"align": null,
+						"filterable": false
+					},
+					"mappings": [],
+					"thresholds": {
+						"mode": "absolute",
+						"steps": [
+							{
+								"color": "green",
+								"value": null
+							},
+							{
+								"color": "red",
+								"value": 80
+							}
+						]
+					}
+				},
+				"overrides": []
+			},
+			"gridPos": {
+				"h": 8,
+				"w": 12,
+				"x": 0,
+				"y": 24
+			},
+			"id": 26,
+			"options": {
+				"showHeader": true,
+				"sortBy": [
+					{
+						"desc": true,
+						"displayName": "events_count"
+					}
+				]
+			},
+			"pluginVersion": "7.3.4",
+			"targets": [
+				{
+					"expr": "rate(fs_windows_events[$interval])",
+					"format": "table",
+					"interval": "",
+					"legendFormat": "",
+					"refId": "A"
+				}
+			],
+			"timeFrom": null,
+			"timeShift": null,
+			"title": "Windows events",
+			"type": "table"
+		}
+	],
+	"refresh": "5s",
+	"schemaVersion": 26,
+	"style": "dark",
+	"tags": [
+		"prometheus-net",
+		"net",
+		"prometheus",
+		".net",
+		".net core"
+	],
+	"templating": {
+		"list": [
+			{
+				"current": {
+				  "selected": false,
+				  "text": "default",
+				  "value": "default"
+				},
+				"description": null,
+				"error": null,
+				"hide": 0,
+				"includeAll": false,
+				"label": null,
+				"multi": false,
+				"name": "datasource",
+				"options": [],
+				"query": "prometheus",
+				"refresh": 1,
+				"regex": "",
+				"skipUrlSync": false,
+				"type": "datasource"
+			  },
+			{
+				"auto": false,
+				"auto_count": 30,
+				"auto_min": "10s",
+				"current": {
+					"selected": false,
+					"text": "1m",
+					"value": "1m"
+				},
+				"error": null,
+				"hide": 0,
+				"label": null,
+				"name": "interval",
+				"options": [
+					{
+						"selected": true,
+						"text": "1m",
+						"value": "1m"
+					},
+					{
+						"selected": false,
+						"text": "5m",
+						"value": "5m"
+					},
+					{
+						"selected": false,
+						"text": "10m",
+						"value": "10m"
+					},
+					{
+						"selected": false,
+						"text": "30m",
+						"value": "30m"
+					},
+					{
+						"selected": false,
+						"text": "1h",
+						"value": "1h"
+					},
+					{
+						"selected": false,
+						"text": "6h",
+						"value": "6h"
+					},
+					{
+						"selected": false,
+						"text": "12h",
+						"value": "12h"
+					},
+					{
+						"selected": false,
+						"text": "1d",
+						"value": "1d"
+					},
+					{
+						"selected": false,
+						"text": "7d",
+						"value": "7d"
+					},
+					{
+						"selected": false,
+						"text": "14d",
+						"value": "14d"
+					},
+					{
+						"selected": false,
+						"text": "30d",
+						"value": "30d"
+					}
+				],
+				"query": "1m,5m,10m,30m,1h,6h,12h,1d,7d,14d,30d",
+				"queryValue": "",
+				"refresh": 2,
+				"skipUrlSync": false,
+				"type": "interval"
+			},
+			{
+				"allValue": null,
+				"current": {
+					"selected": true,
+					"tags": [],
+					"text": [
+						"All"
+					],
+					"value": [
+						"$__all"
+					]
+				},
+				"datasource": "${datasource}",
+				"definition": "label_values(http_requests_received_total, instance)",
+				"error": null,
+				"hide": 0,
+				"includeAll": true,
+				"label": "instances",
+				"multi": true,
+				"name": "instances",
+				"options": [],
+				"query": "label_values(http_requests_received_total, instance)",
+				"refresh": 1,
+				"regex": "",
+				"skipUrlSync": false,
+				"sort": 1,
+				"tagValuesQuery": "",
+				"tags": [],
+				"tagsQuery": "",
+				"type": "query",
+				"useTags": false
+			}
+		]
+	},
+	"time": {
+		"from": "now-15m",
+		"to": "now"
+	},
+	"timepicker": {
+		"refresh_intervals": [
+			"5s",
+			"10s",
+			"30s",
+			"1m",
+			"5m",
+			"15m",
+			"30m",
+			"1h",
+			"2h",
+			"1d"
+		],
+		"time_options": [
+			"5m",
+			"15m",
+			"1h",
+			"6h",
+			"12h",
+			"24h",
+			"2d",
+			"7d",
+			"30d"
+		]
+	},
+	"timezone": "",
+	"title": "Cynet / File Service",
+	"uid": "zyAf4i4Zz",
+	"version": 21
+}

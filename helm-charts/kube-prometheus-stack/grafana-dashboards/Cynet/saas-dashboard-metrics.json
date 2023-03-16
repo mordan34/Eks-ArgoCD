@@ -1,0 +1,1951 @@
+﻿{
+	"annotations": {
+		"list": [
+			{
+				"builtIn": 1,
+				"datasource": "-- Grafana --",
+				"enable": true,
+				"hide": true,
+				"iconColor": "rgba(0, 211, 255, 1)",
+				"name": "Annotations & Alerts",
+				"type": "dashboard"
+			}
+		]
+	},
+	"editable": true,
+	"gnetId": null,
+	"graphTooltip": 0,
+	"id": 113,
+	"iteration": 1610530619955,
+	"links": [],
+	"panels": [
+		{
+			"datasource": "${datasource}",
+			"fieldConfig": {
+				"defaults": {
+					"custom": {
+						"align": null,
+						"filterable": false
+					},
+					"mappings": [],
+					"thresholds": {
+						"mode": "absolute",
+						"steps": [
+							{
+								"color": "dark-red",
+								"value": null
+							},
+							{
+								"color": "dark-red",
+								"value": 1
+							},
+							{
+								"color": "yellow",
+								"value": 5
+							},
+							{
+								"color": "green",
+								"value": 10
+							}
+						]
+					}
+				},
+				"overrides": []
+			},
+			"gridPos": {
+				"h": 6,
+				"w": 24,
+				"x": 0,
+				"y": 0
+			},
+			"id": 28,
+			"options": {
+				"displayMode": "gradient",
+				"orientation": "auto",
+				"reduceOptions": {
+					"calcs": [
+						"mean"
+					],
+					"fields": "",
+					"values": false
+				},
+				"showUnfilled": true
+			},
+			"pluginVersion": "7.3.4",
+			"targets": [
+				{
+					"expr": "sum(dashboard_global_available_resources{Metric=\"Hosts\"}) by (GlobalName)",
+					"format": "time_series",
+					"instant": false,
+					"interval": "",
+					"legendFormat": "{{GlobalName}}",
+					"refId": "A"
+				}
+			],
+			"timeFrom": null,
+			"timeShift": null,
+			"title": "Host Resources by Global",
+			"transformations": [
+				{
+					"id": "groupBy",
+					"options": {
+						"fields": {
+							"GlobalName": {
+								"aggregations": [],
+								"operation": "aggregate"
+							}
+						}
+					}
+				},
+				{
+					"id": "organize",
+					"options": {
+						"excludeByName": {},
+						"indexByName": {},
+						"renameByName": {
+							"Value": "Amount of Available Tenants on Hosts"
+						}
+					}
+				}
+			],
+			"type": "bargauge"
+		},
+		{
+			"datasource": "${datasource}",
+			"fieldConfig": {
+				"defaults": {
+					"custom": {
+						"align": null,
+						"filterable": false
+					},
+					"mappings": [],
+					"thresholds": {
+						"mode": "absolute",
+						"steps": [
+							{
+								"color": "red",
+								"value": null
+							},
+							{
+								"color": "red",
+								"value": 1
+							},
+							{
+								"color": "yellow",
+								"value": 5
+							},
+							{
+								"color": "green",
+								"value": 10
+							}
+						]
+					}
+				},
+				"overrides": []
+			},
+			"gridPos": {
+				"h": 6,
+				"w": 12,
+				"x": 0,
+				"y": 6
+			},
+			"id": 30,
+			"options": {
+				"displayMode": "gradient",
+				"orientation": "auto",
+				"reduceOptions": {
+					"calcs": [
+						"mean"
+					],
+					"fields": "",
+					"values": false
+				},
+				"showUnfilled": true
+			},
+			"pluginVersion": "7.3.4",
+			"targets": [
+				{
+					"expr": "sum(dashboard_global_available_resources{Metric=\"Redis Dockers\"}) by (GlobalName)",
+					"format": "time_series",
+					"instant": false,
+					"interval": "",
+					"legendFormat": "{{GlobalName}}",
+					"refId": "A"
+				}
+			],
+			"timeFrom": null,
+			"timeShift": null,
+			"title": "Redis Resources by Global",
+			"transformations": [
+				{
+					"id": "groupBy",
+					"options": {
+						"fields": {
+							"GlobalName": {
+								"aggregations": [],
+								"operation": "aggregate"
+							}
+						}
+					}
+				},
+				{
+					"id": "organize",
+					"options": {
+						"excludeByName": {},
+						"indexByName": {},
+						"renameByName": {
+							"Value": "Amount of Available Redis on Dockers"
+						}
+					}
+				}
+			],
+			"type": "bargauge"
+		},
+		{
+			"datasource": "${datasource}",
+			"fieldConfig": {
+				"defaults": {
+					"custom": {
+						"align": null,
+						"filterable": false
+					},
+					"mappings": [],
+					"thresholds": {
+						"mode": "absolute",
+						"steps": [
+							{
+								"color": "red",
+								"value": null
+							},
+							{
+								"color": "red",
+								"value": 1
+							},
+							{
+								"color": "#EAB839",
+								"value": 5
+							},
+							{
+								"color": "green",
+								"value": 10
+							}
+						]
+					}
+				},
+				"overrides": []
+			},
+			"gridPos": {
+				"h": 6,
+				"w": 12,
+				"x": 12,
+				"y": 6
+			},
+			"id": 29,
+			"options": {
+				"displayMode": "gradient",
+				"orientation": "auto",
+				"reduceOptions": {
+					"calcs": [
+						"mean"
+					],
+					"fields": "",
+					"values": false
+				},
+				"showUnfilled": true
+			},
+			"pluginVersion": "7.3.4",
+			"targets": [
+				{
+					"expr": "sum(dashboard_global_available_resources{Metric=\"MySql Dockers\"}) by (GlobalName)",
+					"format": "time_series",
+					"instant": false,
+					"interval": "",
+					"legendFormat": "{{GlobalName}}",
+					"refId": "A"
+				}
+			],
+			"timeFrom": null,
+			"timeShift": null,
+			"title": "MySQL Resources by Global",
+			"transformations": [
+				{
+					"id": "groupBy",
+					"options": {
+						"fields": {
+							"GlobalName": {
+								"aggregations": [],
+								"operation": "aggregate"
+							}
+						}
+					}
+				},
+				{
+					"id": "organize",
+					"options": {
+						"excludeByName": {},
+						"indexByName": {},
+						"renameByName": {
+							"Value": "Amount of Available MySQL on Dockers"
+						}
+					}
+				}
+			],
+			"type": "bargauge"
+		},
+		{
+			"datasource": "${datasource}",
+			"fieldConfig": {
+				"defaults": {
+					"custom": {
+						"align": null,
+						"filterable": false
+					},
+					"mappings": [],
+					"thresholds": {
+						"mode": "absolute",
+						"steps": [
+							{
+								"color": "blue",
+								"value": null
+							}
+						]
+					}
+				},
+				"overrides": []
+			},
+			"gridPos": {
+				"h": 6,
+				"w": 24,
+				"x": 0,
+				"y": 12
+			},
+			"id": 31,
+			"options": {
+				"displayMode": "gradient",
+				"orientation": "auto",
+				"reduceOptions": {
+					"calcs": [
+						"mean"
+					],
+					"fields": "",
+					"values": false
+				},
+				"showUnfilled": true
+			},
+			"pluginVersion": "7.3.4",
+			"targets": [
+				{
+					"expr": "sum(dashboard_region_available_resources{Metric=\"Global Count\"}) by (RegionName)",
+					"format": "time_series",
+					"instant": false,
+					"interval": "",
+					"legendFormat": "{{RegionName}}",
+					"refId": "A"
+				}
+			],
+			"timeFrom": null,
+			"timeShift": null,
+			"title": "Global Count by Region",
+			"transformations": [
+				{
+					"id": "groupBy",
+					"options": {
+						"fields": {
+							"GlobalName": {
+								"aggregations": [],
+								"operation": "aggregate"
+							}
+						}
+					}
+				},
+				{
+					"id": "organize",
+					"options": {
+						"excludeByName": {},
+						"indexByName": {},
+						"renameByName": {
+							"Value": "Amount of Globals"
+						}
+					}
+				}
+			],
+			"type": "bargauge"
+		},
+		{
+			"datasource": "${datasource}",
+			"fieldConfig": {
+				"defaults": {
+					"custom": {
+						"align": null,
+						"filterable": false
+					},
+					"mappings": [],
+					"thresholds": {
+						"mode": "absolute",
+						"steps": [
+							{
+								"color": "red",
+								"value": null
+							},
+							{
+								"color": "red",
+								"value": 1
+							},
+							{
+								"color": "yellow",
+								"value": 5
+							},
+							{
+								"color": "green",
+								"value": 10
+							}
+						]
+					}
+				},
+				"overrides": []
+			},
+			"gridPos": {
+				"h": 6,
+				"w": 12,
+				"x": 0,
+				"y": 18
+			},
+			"id": 32,
+			"options": {
+				"displayMode": "gradient",
+				"orientation": "auto",
+				"reduceOptions": {
+					"calcs": [
+						"mean"
+					],
+					"fields": "",
+					"values": false
+				},
+				"showUnfilled": true
+			},
+			"pluginVersion": "7.3.4",
+			"targets": [
+				{
+					"expr": "sum(dashboard_region_available_resources{Metric=\"Hosts\"}) by (RegionName)",
+					"format": "time_series",
+					"instant": false,
+					"interval": "",
+					"legendFormat": "{{RegionName}}",
+					"refId": "A"
+				}
+			],
+			"timeFrom": null,
+			"timeShift": null,
+			"title": "Host Resources by Region",
+			"transformations": [
+				{
+					"id": "groupBy",
+					"options": {
+						"fields": {
+							"GlobalName": {
+								"aggregations": [],
+								"operation": "aggregate"
+							}
+						}
+					}
+				},
+				{
+					"id": "organize",
+					"options": {
+						"excludeByName": {},
+						"indexByName": {},
+						"renameByName": {
+							"Value": "Amount of Available Tenants on Hosts"
+						}
+					}
+				}
+			],
+			"type": "bargauge"
+		},
+		{
+			"datasource": "${datasource}",
+			"fieldConfig": {
+				"defaults": {
+					"custom": {
+						"align": null,
+						"filterable": false
+					},
+					"mappings": [],
+					"thresholds": {
+						"mode": "absolute",
+						"steps": [
+							{
+								"color": "red",
+								"value": null
+							},
+							{
+								"color": "red",
+								"value": 1
+							},
+							{
+								"color": "yellow",
+								"value": 2
+							},
+							{
+								"color": "green",
+								"value": 5
+							}
+						]
+					}
+				},
+				"overrides": []
+			},
+			"gridPos": {
+				"h": 6,
+				"w": 12,
+				"x": 12,
+				"y": 18
+			},
+			"id": 35,
+			"options": {
+				"displayMode": "gradient",
+				"orientation": "auto",
+				"reduceOptions": {
+					"calcs": [
+						"mean"
+					],
+					"fields": "",
+					"values": false
+				},
+				"showUnfilled": true
+			},
+			"pluginVersion": "7.3.4",
+			"targets": [
+				{
+					"expr": "sum(dashboard_region_available_resources{Metric=\"Registration Pools\"}) by (RegionName)",
+					"format": "time_series",
+					"instant": false,
+					"interval": "",
+					"legendFormat": "{{RegionName}}",
+					"refId": "A"
+				}
+			],
+			"timeFrom": null,
+			"timeShift": null,
+			"title": "Registration Pools by Region",
+			"transformations": [
+				{
+					"id": "groupBy",
+					"options": {
+						"fields": {
+							"GlobalName": {
+								"aggregations": [],
+								"operation": "aggregate"
+							}
+						}
+					}
+				},
+				{
+					"id": "organize",
+					"options": {
+						"excludeByName": {},
+						"indexByName": {},
+						"renameByName": {
+							"Value": "Amount of Available Registration Pools"
+						}
+					}
+				}
+			],
+			"type": "bargauge"
+		},
+		{
+			"datasource": "${datasource}",
+			"fieldConfig": {
+				"defaults": {
+					"custom": {
+						"align": null,
+						"filterable": false
+					},
+					"mappings": [],
+					"thresholds": {
+						"mode": "absolute",
+						"steps": [
+							{
+								"color": "red",
+								"value": null
+							},
+							{
+								"color": "red",
+								"value": 1
+							},
+							{
+								"color": "#EAB839",
+								"value": 5
+							},
+							{
+								"color": "green",
+								"value": 10
+							}
+						]
+					}
+				},
+				"overrides": []
+			},
+			"gridPos": {
+				"h": 6,
+				"w": 12,
+				"x": 0,
+				"y": 24
+			},
+			"id": 33,
+			"options": {
+				"displayMode": "gradient",
+				"orientation": "auto",
+				"reduceOptions": {
+					"calcs": [
+						"mean"
+					],
+					"fields": "",
+					"values": false
+				},
+				"showUnfilled": true
+			},
+			"pluginVersion": "7.3.4",
+			"targets": [
+				{
+					"expr": "sum(dashboard_region_available_resources{Metric=\"MySql Dockers\"}) by (RegionName)",
+					"format": "time_series",
+					"instant": false,
+					"interval": "",
+					"legendFormat": "{{RegionName}}",
+					"refId": "A"
+				}
+			],
+			"timeFrom": null,
+			"timeShift": null,
+			"title": "MySQL Resources by Region",
+			"transformations": [
+				{
+					"id": "groupBy",
+					"options": {
+						"fields": {
+							"GlobalName": {
+								"aggregations": [],
+								"operation": "aggregate"
+							}
+						}
+					}
+				},
+				{
+					"id": "organize",
+					"options": {
+						"excludeByName": {},
+						"indexByName": {},
+						"renameByName": {
+							"Value": "Amount of Available MySQL on Docker"
+						}
+					}
+				}
+			],
+			"type": "bargauge"
+		},
+		{
+			"datasource": "${datasource}",
+			"fieldConfig": {
+				"defaults": {
+					"custom": {
+						"align": null,
+						"filterable": false
+					},
+					"mappings": [],
+					"thresholds": {
+						"mode": "absolute",
+						"steps": [
+							{
+								"color": "red",
+								"value": null
+							},
+							{
+								"color": "red",
+								"value": 1
+							},
+							{
+								"color": "#EAB839",
+								"value": 5
+							},
+							{
+								"color": "green",
+								"value": 10
+							}
+						]
+					}
+				},
+				"overrides": []
+			},
+			"gridPos": {
+				"h": 6,
+				"w": 12,
+				"x": 12,
+				"y": 24
+			},
+			"id": 34,
+			"options": {
+				"displayMode": "gradient",
+				"orientation": "auto",
+				"reduceOptions": {
+					"calcs": [
+						"mean"
+					],
+					"fields": "",
+					"values": false
+				},
+				"showUnfilled": true
+			},
+			"pluginVersion": "7.3.4",
+			"targets": [
+				{
+					"expr": "sum(dashboard_region_available_resources{Metric=\"Redis Dockers\"}) by (RegionName)",
+					"format": "time_series",
+					"instant": false,
+					"interval": "",
+					"legendFormat": "{{RegionName}}",
+					"refId": "A"
+				}
+			],
+			"timeFrom": null,
+			"timeShift": null,
+			"title": "Redis Resources by Region",
+			"transformations": [
+				{
+					"id": "groupBy",
+					"options": {
+						"fields": {
+							"GlobalName": {
+								"aggregations": [],
+								"operation": "aggregate"
+							}
+						}
+					}
+				},
+				{
+					"id": "organize",
+					"options": {
+						"excludeByName": {},
+						"indexByName": {},
+						"renameByName": {
+							"Value": "Amount of Available Redis on Docker"
+						}
+					}
+				}
+			],
+			"type": "bargauge"
+		},
+		{
+			"aliasColors": {},
+			"bars": false,
+			"dashLength": 10,
+			"dashes": false,
+			"datasource": "${datasource}",
+			"fieldConfig": {
+				"defaults": {
+					"custom": {}
+				},
+				"overrides": []
+			},
+			"fill": 1,
+			"fillGradient": 0,
+			"gridPos": {
+				"h": 8,
+				"w": 8,
+				"x": 0,
+				"y": 30
+			},
+			"hiddenSeries": false,
+			"id": 26,
+			"legend": {
+				"avg": false,
+				"current": false,
+				"max": false,
+				"min": false,
+				"show": true,
+				"total": false,
+				"values": false
+			},
+			"lines": true,
+			"linewidth": 1,
+			"nullPointMode": "null",
+			"options": {
+				"alertThreshold": true
+			},
+			"percentage": false,
+			"pluginVersion": "7.3.4",
+			"pointradius": 2,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [],
+			"spaceLength": 10,
+			"stack": false,
+			"steppedLine": false,
+			"targets": [
+				{
+					"expr": "sum(rate(host_agent_action_duration_seconds_count[5m])) by (action, tenant_id)",
+					"hide": false,
+					"interval": "",
+					"legendFormat": "",
+					"refId": "A"
+				}
+			],
+			"thresholds": [],
+			"timeFrom": null,
+			"timeRegions": [],
+			"timeShift": null,
+			"title": "Host agent actions duration",
+			"tooltip": {
+				"shared": true,
+				"sort": 0,
+				"value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+				"buckets": null,
+				"mode": "time",
+				"name": null,
+				"show": true,
+				"values": []
+			},
+			"yaxes": [
+				{
+					"format": "short",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				},
+				{
+					"format": "short",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				}
+			],
+			"yaxis": {
+				"align": false,
+				"alignLevel": null
+			}
+		},
+		{
+			"aliasColors": {},
+			"bars": false,
+			"dashLength": 10,
+			"dashes": false,
+			"datasource": "${datasource}",
+			"fieldConfig": {
+				"defaults": {
+					"custom": {},
+					"links": []
+				},
+				"overrides": []
+			},
+			"fill": 1,
+			"fillGradient": 4,
+			"gridPos": {
+				"h": 8,
+				"w": 8,
+				"x": 8,
+				"y": 30
+			},
+			"hiddenSeries": false,
+			"id": 12,
+			"legend": {
+				"alignAsTable": false,
+				"avg": false,
+				"current": false,
+				"hideEmpty": false,
+				"hideZero": false,
+				"max": false,
+				"min": false,
+				"rightSide": false,
+				"show": false,
+				"total": false,
+				"values": false
+			},
+			"lines": true,
+			"linewidth": 1,
+			"nullPointMode": "null",
+			"options": {
+				"alertThreshold": true
+			},
+			"percentage": false,
+			"pluginVersion": "7.3.4",
+			"pointradius": 2,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [],
+			"spaceLength": 10,
+			"stack": false,
+			"steppedLine": false,
+			"targets": [
+				{
+					"expr": "dashboard_monitoring_tenants_pcq_count",
+					"interval": "",
+					"legendFormat": "{{client_db_id}}",
+					"refId": "A"
+				}
+			],
+			"thresholds": [],
+			"timeFrom": null,
+			"timeRegions": [],
+			"timeShift": null,
+			"title": "Client PCQ count",
+			"tooltip": {
+				"shared": true,
+				"sort": 2,
+				"value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+				"buckets": null,
+				"mode": "time",
+				"name": null,
+				"show": true,
+				"values": []
+			},
+			"yaxes": [
+				{
+					"format": "short",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				},
+				{
+					"format": "short",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				}
+			],
+			"yaxis": {
+				"align": false,
+				"alignLevel": null
+			}
+		},
+		{
+			"datasource": "${datasource}",
+			"fieldConfig": {
+				"defaults": {
+					"custom": {
+						"align": null,
+						"filterable": false
+					},
+					"links": [],
+					"mappings": [],
+					"thresholds": {
+						"mode": "absolute",
+						"steps": [
+							{
+								"color": "green",
+								"value": null
+							},
+							{
+								"color": "red",
+								"value": 80
+							}
+						]
+					}
+				},
+				"overrides": []
+			},
+			"gridPos": {
+				"h": 8,
+				"w": 8,
+				"x": 16,
+				"y": 30
+			},
+			"id": 24,
+			"options": {
+				"displayMode": "gradient",
+				"orientation": "auto",
+				"reduceOptions": {
+					"calcs": [
+						"mean"
+					],
+					"fields": "",
+					"values": false
+				},
+				"showUnfilled": true
+			},
+			"pluginVersion": "7.3.4",
+			"targets": [
+				{
+					"expr": "dashboard_monitoring_tenants_active_scans_dropped {drop_detected=\"True\"}",
+					"interval": "",
+					"legendFormat": "{{client_db_id}}",
+					"refId": "A"
+				}
+			],
+			"timeFrom": null,
+			"timeShift": null,
+			"title": "dashbdashboard_monitoring_tenants_active_scans_dropped",
+			"type": "bargauge"
+		},
+		{
+			"datasource": "${datasource}",
+			"fieldConfig": {
+				"defaults": {
+					"custom": {},
+					"mappings": [
+						{
+							"from": "",
+							"id": 0,
+							"operator": "",
+							"text": "",
+							"to": "",
+							"type": 1,
+							"value": "0"
+						}
+					],
+					"thresholds": {
+						"mode": "absolute",
+						"steps": [
+							{
+								"color": "red",
+								"value": null
+							}
+						]
+					}
+				},
+				"overrides": []
+			},
+			"gridPos": {
+				"h": 5,
+				"w": 24,
+				"x": 0,
+				"y": 38
+			},
+			"id": 10,
+			"options": {
+				"colorMode": "background",
+				"graphMode": "area",
+				"justifyMode": "center",
+				"orientation": "auto",
+				"reduceOptions": {
+					"calcs": [
+						"lastNotNull"
+					],
+					"fields": "",
+					"values": false
+				},
+				"textMode": "auto"
+			},
+			"pluginVersion": "7.3.4",
+			"repeat": "agentHost",
+			"scopedVars": {
+				"agentHost": {
+					"selected": true,
+					"text": "Central Mgmt",
+					"value": "Central Mgmt"
+				}
+			},
+			"targets": [
+				{
+					"expr": "sum(dashboard_monitoring_agents_health) by (host_name)",
+					"hide": true,
+					"interval": "",
+					"legendFormat": "{{host_name}}",
+					"refId": "A"
+				},
+				{
+					"expr": "avg(dashboard_monitoring_agents_health) by (host_name) == 0",
+					"interval": "",
+					"legendFormat": "{{host_name}}",
+					"refId": "B"
+				}
+			],
+			"timeFrom": null,
+			"timeShift": null,
+			"title": "Unhealthy dashboard agents",
+			"type": "stat"
+		},
+		{
+			"aliasColors": {},
+			"bars": false,
+			"dashLength": 10,
+			"dashes": false,
+			"datasource": "${datasource}",
+			"fieldConfig": {
+				"defaults": {
+					"custom": {},
+					"links": []
+				},
+				"overrides": []
+			},
+			"fill": 1,
+			"fillGradient": 4,
+			"gridPos": {
+				"h": 8,
+				"w": 12,
+				"x": 0,
+				"y": 43
+			},
+			"hiddenSeries": false,
+			"id": 22,
+			"legend": {
+				"alignAsTable": false,
+				"avg": false,
+				"current": true,
+				"max": false,
+				"min": false,
+				"rightSide": false,
+				"show": false,
+				"total": false,
+				"values": true
+			},
+			"lines": true,
+			"linewidth": 1,
+			"nullPointMode": "null",
+			"options": {
+				"alertThreshold": true
+			},
+			"percentage": false,
+			"pluginVersion": "7.3.4",
+			"pointradius": 2,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [],
+			"spaceLength": 10,
+			"stack": false,
+			"steppedLine": false,
+			"targets": [
+				{
+					"expr": "dashboard_monitoring_to_scans",
+					"interval": "",
+					"legendFormat": "{{name}}",
+					"refId": "A"
+				}
+			],
+			"thresholds": [],
+			"timeFrom": null,
+			"timeRegions": [],
+			"timeShift": null,
+			"title": "Inactive count",
+			"tooltip": {
+				"shared": true,
+				"sort": 2,
+				"value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+				"buckets": null,
+				"mode": "time",
+				"name": null,
+				"show": true,
+				"values": []
+			},
+			"yaxes": [
+				{
+					"format": "short",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				},
+				{
+					"format": "short",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				}
+			],
+			"yaxis": {
+				"align": false,
+				"alignLevel": null
+			}
+		},
+		{
+			"aliasColors": {},
+			"bars": false,
+			"dashLength": 10,
+			"dashes": false,
+			"datasource": "${datasource}",
+			"fieldConfig": {
+				"defaults": {
+					"custom": {},
+					"links": []
+				},
+				"overrides": []
+			},
+			"fill": 1,
+			"fillGradient": 4,
+			"gridPos": {
+				"h": 8,
+				"w": 12,
+				"x": 12,
+				"y": 43
+			},
+			"hiddenSeries": false,
+			"id": 20,
+			"legend": {
+				"avg": false,
+				"current": false,
+				"max": false,
+				"min": false,
+				"show": false,
+				"total": false,
+				"values": false
+			},
+			"lines": true,
+			"linewidth": 1,
+			"nullPointMode": "null",
+			"options": {
+				"alertThreshold": true
+			},
+			"percentage": false,
+			"pluginVersion": "7.3.4",
+			"pointradius": 2,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [],
+			"spaceLength": 10,
+			"stack": false,
+			"steppedLine": false,
+			"targets": [
+				{
+					"expr": "dashboard_monitoring_active_scans",
+					"interval": "",
+					"legendFormat": "{{name}}",
+					"refId": "A"
+				}
+			],
+			"thresholds": [],
+			"timeFrom": null,
+			"timeRegions": [],
+			"timeShift": null,
+			"title": "Active count",
+			"tooltip": {
+				"shared": true,
+				"sort": 2,
+				"value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+				"buckets": null,
+				"mode": "time",
+				"name": null,
+				"show": true,
+				"values": []
+			},
+			"yaxes": [
+				{
+					"format": "short",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				},
+				{
+					"format": "short",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				}
+			],
+			"yaxis": {
+				"align": false,
+				"alignLevel": null
+			}
+		},
+		{
+			"aliasColors": {},
+			"bars": false,
+			"dashLength": 10,
+			"dashes": false,
+			"datasource": "${datasource}",
+			"fieldConfig": {
+				"defaults": {
+					"custom": {},
+					"links": []
+				},
+				"overrides": []
+			},
+			"fill": 1,
+			"fillGradient": 0,
+			"gridPos": {
+				"h": 7,
+				"w": 8,
+				"x": 0,
+				"y": 51
+			},
+			"hiddenSeries": false,
+			"id": 14,
+			"legend": {
+				"avg": false,
+				"current": false,
+				"max": false,
+				"min": false,
+				"show": true,
+				"total": false,
+				"values": false
+			},
+			"lines": true,
+			"linewidth": 1,
+			"nullPointMode": "null",
+			"options": {
+				"alertThreshold": true
+			},
+			"percentage": false,
+			"pluginVersion": "7.3.4",
+			"pointradius": 2,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [],
+			"spaceLength": 10,
+			"stack": false,
+			"steppedLine": false,
+			"targets": [
+				{
+					"expr": "dotnet_total_memory_bytes{job=\"dashboard\", namespace=\"cynet\"}",
+					"interval": "",
+					"legendFormat": "{{pod}}",
+					"refId": "A"
+				}
+			],
+			"thresholds": [],
+			"timeFrom": null,
+			"timeRegions": [],
+			"timeShift": null,
+			"title": "DotNet memory usage",
+			"tooltip": {
+				"shared": true,
+				"sort": 0,
+				"value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+				"buckets": null,
+				"mode": "time",
+				"name": null,
+				"show": true,
+				"values": []
+			},
+			"yaxes": [
+				{
+					"format": "decbytes",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				},
+				{
+					"format": "short",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				}
+			],
+			"yaxis": {
+				"align": false,
+				"alignLevel": null
+			}
+		},
+		{
+			"aliasColors": {},
+			"bars": false,
+			"dashLength": 10,
+			"dashes": false,
+			"datasource": "${datasource}",
+			"fieldConfig": {
+				"defaults": {
+					"custom": {},
+					"links": []
+				},
+				"overrides": []
+			},
+			"fill": 1,
+			"fillGradient": 0,
+			"gridPos": {
+				"h": 7,
+				"w": 8,
+				"x": 8,
+				"y": 51
+			},
+			"hiddenSeries": false,
+			"id": 16,
+			"legend": {
+				"avg": false,
+				"current": false,
+				"max": false,
+				"min": false,
+				"show": true,
+				"total": false,
+				"values": false
+			},
+			"lines": true,
+			"linewidth": 1,
+			"nullPointMode": "null",
+			"options": {
+				"alertThreshold": true
+			},
+			"percentage": false,
+			"pluginVersion": "7.3.4",
+			"pointradius": 2,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [],
+			"spaceLength": 10,
+			"stack": false,
+			"steppedLine": false,
+			"targets": [
+				{
+					"expr": "container_memory_usage_bytes{container=\"dashboard\", namespace=\"cynet\"}",
+					"interval": "",
+					"legendFormat": "{{pod}}",
+					"refId": "A"
+				}
+			],
+			"thresholds": [],
+			"timeFrom": null,
+			"timeRegions": [],
+			"timeShift": null,
+			"title": "Container Total Memory usage",
+			"tooltip": {
+				"shared": true,
+				"sort": 0,
+				"value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+				"buckets": null,
+				"mode": "time",
+				"name": null,
+				"show": true,
+				"values": []
+			},
+			"yaxes": [
+				{
+					"format": "decbytes",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				},
+				{
+					"format": "short",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				}
+			],
+			"yaxis": {
+				"align": false,
+				"alignLevel": null
+			}
+		},
+		{
+			"aliasColors": {},
+			"bars": false,
+			"dashLength": 10,
+			"dashes": false,
+			"datasource": "${datasource}",
+			"fieldConfig": {
+				"defaults": {
+					"custom": {},
+					"links": []
+				},
+				"overrides": []
+			},
+			"fill": 1,
+			"fillGradient": 0,
+			"gridPos": {
+				"h": 7,
+				"w": 8,
+				"x": 16,
+				"y": 51
+			},
+			"hiddenSeries": false,
+			"id": 18,
+			"legend": {
+				"avg": false,
+				"current": false,
+				"max": false,
+				"min": false,
+				"show": true,
+				"total": false,
+				"values": false
+			},
+			"lines": true,
+			"linewidth": 1,
+			"nullPointMode": "null",
+			"options": {
+				"alertThreshold": true
+			},
+			"percentage": false,
+			"pluginVersion": "7.3.4",
+			"pointradius": 2,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [],
+			"spaceLength": 10,
+			"stack": false,
+			"steppedLine": false,
+			"targets": [
+				{
+					"expr": "node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate{container=\"dashboard\", namespace=\"cynet\"}",
+					"interval": "",
+					"legendFormat": "{{node}}",
+					"refId": "A"
+				}
+			],
+			"thresholds": [],
+			"timeFrom": null,
+			"timeRegions": [],
+			"timeShift": null,
+			"title": "CPU usage",
+			"tooltip": {
+				"shared": true,
+				"sort": 0,
+				"value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+				"buckets": null,
+				"mode": "time",
+				"name": null,
+				"show": true,
+				"values": []
+			},
+			"yaxes": [
+				{
+					"format": "short",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				},
+				{
+					"format": "short",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				}
+			],
+			"yaxis": {
+				"align": false,
+				"alignLevel": null
+			}
+		},
+		{
+			"aliasColors": {},
+			"bars": false,
+			"dashLength": 10,
+			"dashes": false,
+			"datasource": "${datasource}",
+			"fieldConfig": {
+				"defaults": {
+					"custom": {}
+				},
+				"overrides": []
+			},
+			"fill": 1,
+			"fillGradient": 0,
+			"gridPos": {
+				"h": 8,
+				"w": 8,
+				"x": 0,
+				"y": 58
+			},
+			"hiddenSeries": false,
+			"id": 37,
+			"legend": {
+				"avg": false,
+				"current": false,
+				"max": false,
+				"min": false,
+				"show": true,
+				"total": false,
+				"values": false
+			},
+			"lines": true,
+			"linewidth": 1,
+			"nullPointMode": "null",
+			"options": {
+				"alertThreshold": true
+			},
+			"percentage": false,
+			"pluginVersion": "7.3.4",
+			"pointradius": 2,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [],
+			"spaceLength": 10,
+			"stack": false,
+			"steppedLine": false,
+			"targets": [
+				{
+					"expr": "increase(notifications_blocked_email_messages[5m])",
+					"format": "heatmap",
+					"interval": "",
+					"legendFormat": "",
+					"refId": "A"
+				}
+			],
+			"thresholds": [],
+			"timeFrom": null,
+			"timeRegions": [],
+			"timeShift": null,
+			"title": "Blocked Email Messages",
+			"tooltip": {
+				"shared": true,
+				"sort": 0,
+				"value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+				"buckets": null,
+				"mode": "time",
+				"name": null,
+				"show": true,
+				"values": []
+			},
+			"yaxes": [
+				{
+					"format": "short",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				},
+				{
+					"format": "short",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				}
+			],
+			"yaxis": {
+				"align": false,
+				"alignLevel": null
+			}
+		}
+	],
+	"refresh": false,
+	"schemaVersion": 26,
+	"style": "dark",
+	"tags": [],
+	"templating": {
+		"list": [{
+			"current": {
+			  "selected": false,
+			  "text": "default",
+			  "value": "default"
+			},
+			"description": null,
+			"error": null,
+			"hide": 0,
+			"includeAll": false,
+			"label": null,
+			"multi": false,
+			"name": "datasource",
+			"options": [],
+			"query": "prometheus",
+			"refresh": 1,
+			"regex": "",
+			"skipUrlSync": false,
+			"type": "datasource"
+		  },
+			{
+				"allValue": null,
+				"current": {
+					"selected": false,
+					"text": "Central Mgmt",
+					"value": "Central Mgmt"
+				},
+				"datasource": "${datasource}",
+				"definition": "label_values(dashboard_monitoring_agents_health, host_name)",
+				"error": null,
+				"hide": 0,
+				"includeAll": false,
+				"label": null,
+				"multi": false,
+				"name": "agentHost",
+				"options": [
+					{
+						"selected": true,
+						"text": "Central Mgmt",
+						"value": "Central Mgmt"
+					},
+					{
+						"selected": false,
+						"text": "CyberX",
+						"value": "CyberX"
+					},
+					{
+						"selected": false,
+						"text": "EU Global Allianz",
+						"value": "EU Global Allianz"
+					},
+					{
+						"selected": false,
+						"text": "EU Global Cynet HQ",
+						"value": "EU Global Cynet HQ"
+					},
+					{
+						"selected": false,
+						"text": "EU Global Dogfood",
+						"value": "EU Global Dogfood"
+					},
+					{
+						"selected": false,
+						"text": "EU Global InfoSec",
+						"value": "EU Global InfoSec"
+					},
+					{
+						"selected": false,
+						"text": "EU Global Integration",
+						"value": "EU Global Integration"
+					},
+					{
+						"selected": false,
+						"text": "EU Global Signup",
+						"value": "EU Global Signup"
+					},
+					{
+						"selected": false,
+						"text": "EU Global VIKT",
+						"value": "EU Global VIKT"
+					},
+					{
+						"selected": false,
+						"text": "EU Global Vincacyber",
+						"value": "EU Global Vincacyber"
+					},
+					{
+						"selected": false,
+						"text": "EU Global Volarisgroup",
+						"value": "EU Global Volarisgroup"
+					},
+					{
+						"selected": false,
+						"text": "EU Host 01",
+						"value": "EU Host 01"
+					},
+					{
+						"selected": false,
+						"text": "EU Host 02",
+						"value": "EU Host 02"
+					},
+					{
+						"selected": false,
+						"text": "EU Host 03",
+						"value": "EU Host 03"
+					},
+					{
+						"selected": false,
+						"text": "EU Host 04",
+						"value": "EU Host 04"
+					},
+					{
+						"selected": false,
+						"text": "EU TrafficRouter",
+						"value": "EU TrafficRouter"
+					},
+					{
+						"selected": false,
+						"text": "EU-Host-05",
+						"value": "EU-Host-05"
+					},
+					{
+						"selected": false,
+						"text": "EU-Host-06",
+						"value": "EU-Host-06"
+					},
+					{
+						"selected": false,
+						"text": "US FileService",
+						"value": "US FileService"
+					},
+					{
+						"selected": false,
+						"text": "US Global CGS Inc",
+						"value": "US Global CGS Inc"
+					},
+					{
+						"selected": false,
+						"text": "US Global Cybersec",
+						"value": "US Global Cybersec"
+					},
+					{
+						"selected": false,
+						"text": "US Global Innovat3d",
+						"value": "US Global Innovat3d"
+					},
+					{
+						"selected": false,
+						"text": "US Global SPP",
+						"value": "US Global SPP"
+					},
+					{
+						"selected": false,
+						"text": "US Global SourcetekIT",
+						"value": "US Global SourcetekIT"
+					},
+					{
+						"selected": false,
+						"text": "US Global SplashWire",
+						"value": "US Global SplashWire"
+					},
+					{
+						"selected": false,
+						"text": "US Global Stealth",
+						"value": "US Global Stealth"
+					},
+					{
+						"selected": false,
+						"text": "US Global SterlingInfo",
+						"value": "US Global SterlingInfo"
+					},
+					{
+						"selected": false,
+						"text": "US Global USProd",
+						"value": "US Global USProd"
+					},
+					{
+						"selected": false,
+						"text": "US Global Vars",
+						"value": "US Global Vars"
+					},
+					{
+						"selected": false,
+						"text": "US Global WTS",
+						"value": "US Global WTS"
+					},
+					{
+						"selected": false,
+						"text": "US Global Yarix",
+						"value": "US Global Yarix"
+					},
+					{
+						"selected": false,
+						"text": "US Global fibco",
+						"value": "US Global fibco"
+					},
+					{
+						"selected": false,
+						"text": "US Host 01",
+						"value": "US Host 01"
+					},
+					{
+						"selected": false,
+						"text": "US Host 02",
+						"value": "US Host 02"
+					},
+					{
+						"selected": false,
+						"text": "US Host 03",
+						"value": "US Host 03"
+					},
+					{
+						"selected": false,
+						"text": "US Host 04",
+						"value": "US Host 04"
+					},
+					{
+						"selected": false,
+						"text": "US TrafficRouter",
+						"value": "US TrafficRouter"
+					},
+					{
+						"selected": false,
+						"text": "US-Host-05",
+						"value": "US-Host-05"
+					},
+					{
+						"selected": false,
+						"text": "US-Host-06",
+						"value": "US-Host-06"
+					},
+					{
+						"selected": false,
+						"text": "US-Host-07",
+						"value": "US-Host-07"
+					},
+					{
+						"selected": false,
+						"text": "US-Host-08",
+						"value": "US-Host-08"
+					},
+					{
+						"selected": false,
+						"text": "US-Host-09",
+						"value": "US-Host-09"
+					},
+					{
+						"selected": false,
+						"text": "US-Host-10",
+						"value": "US-Host-10"
+					},
+					{
+						"selected": false,
+						"text": "ea40",
+						"value": "ea40"
+					},
+					{
+						"selected": false,
+						"text": "prod-saas-us-host-11",
+						"value": "prod-saas-us-host-11"
+					}
+				],
+				"query": "label_values(dashboard_monitoring_agents_health, host_name)",
+				"refresh": 0,
+				"regex": "",
+				"skipUrlSync": false,
+				"sort": 0,
+				"tagValuesQuery": "",
+				"tags": [],
+				"tagsQuery": "",
+				"type": "query",
+				"useTags": false
+			}
+		]
+	},
+	"time": {
+		"from": "now-3h",
+		"to": "now"
+	},
+	"timepicker": {
+		"refresh_intervals": [
+			"10s",
+			"30s",
+			"1m",
+			"5m",
+			"15m",
+			"30m",
+			"1h",
+			"2h",
+			"1d"
+		]
+	},
+	"timezone": "",
+	"title": "Cynet / SaaS.Dashboard monitoring",
+	"uid": "ubkSVjNGz",
+	"version": 24
+}
