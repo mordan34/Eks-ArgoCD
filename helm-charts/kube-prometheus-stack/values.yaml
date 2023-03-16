@@ -1,0 +1,38 @@
+prometheusOperator:
+          admissionWebhooks:
+            enabled: true
+          prometheusConfigReloader:
+            resources: {}
+        # prometheus:
+          # prometheusSpec:
+            # storageSpec:
+            #   volumeClaimTemplate:
+            #     spec:
+            #       storageClassName: gp2
+            #       accessModes: ["ReadWriteOnce"]
+            #       resources:
+            #         requests:
+            #           storage: 100Gi
+            # retention: 30d
+        grafana: 
+          ingress:
+            enabled: true
+            ingressClassName: alb
+            annotations:
+              alb.ingress.kubernetes.io/target-type: 'ip'
+              alb.ingress.kubernetes.io/scheme: internet-facing
+              alb.ingress.kubernetes.io/healthcheck-path:	/api/health
+              external-dns.alpha.kubernetes.io/hostname: monitoring.tikaldev.click
+            hosts:
+              - monitoring.tikaldev.click
+            dashboards:
+              default:
+                argocd:
+                  url: https://raw.githubusercontent.com/argoproj/argo-cd/master/examples/dashboard.json
+                  datasource: default
+                argocd-notifications:
+                  url: https://argocd-notifications.readthedocs.io/en/stable/grafana-dashboard.json
+                  datasource: default
+                argocd-image-updater:
+                  url: https://raw.githubusercontent.com/argoproj-labs/argocd-image-updater/master/config/example-grafana-dashboard.json
+                  datasource: default
