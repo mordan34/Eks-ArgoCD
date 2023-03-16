@@ -534,7 +534,7 @@ kube-prometheus-stack:
 
     ingress:
       enabled: true
-      ingressClassName: from-office
+      ingressClassName: alb
 #      annotations:
         # external-dns.alpha.kubernetes.io/hostname: alertmanager{{ .Values.spec.dnsDomain }}
         # external-dns.alpha.kubernetes.io/target: from-office{{ .Values.spec.dnsDomain }}
@@ -742,7 +742,7 @@ kube-prometheus-stack:
 
     ingress:
       enabled: true
-      ingressClassName: from-office
+      ingressClassName: alb
       pathType: Prefix
     podDisruptionBudget:
       enabled: true
