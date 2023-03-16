@@ -536,8 +536,8 @@ kube-prometheus-stack:
       enabled: true
       ingressClassName: alb
 #      annotations:
-        # external-dns.alpha.kubernetes.io/hostname: alertmanager{{ .Values.spec.dnsDomain }}
-        # external-dns.alpha.kubernetes.io/target: from-office{{ .Values.spec.dnsDomain }}
+         external-dns.alpha.kubernetes.io/hostname: alertmanager.tikaldev.click
+         #external-dns.alpha.kubernetes.io/target: from-office{{ .Values.spec.dnsDomain }}
       # hosts:
       #   - alertmanager{{ .Values.spec.dnsDomain }}
       pathType: Prefix
