@@ -564,7 +564,7 @@ kube-prometheus-stack:
 
     ingress:
       enabled: true
-      ingressClassName: from-office
+      ingressClassName: alb
       annotations:
         nginx.ingress.kubernetes.io/auth-response-headers: X-Auth-Request-User,X-Auth-Request-Email,X-Auth-Request-Preferred-Username
         alb.ingress.kubernetes.io/target-type: 'ip'
